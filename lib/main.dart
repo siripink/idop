@@ -9,7 +9,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'IDOP',
       theme: new ThemeData(
         primarySwatch: Colors.deepOrange,
         primaryColor: const Color(0xFFff5722),
@@ -41,10 +42,27 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _showExplanatoryText() {
+    print("pressed ");
+  }
+
+  Widget buildFloatingActionButton() {
+    return new FloatingActionButton(
+        key: new ValueKey<Color>(Colors.red),
+        tooltip: 'Apply',
+        backgroundColor: Colors.blueGrey,
+        child: Text('APPLY',
+          style: TextStyle(
+          fontSize: 12.0,
+        ),),
+        onPressed: _showExplanatoryText
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget titleSection = Container(
-      padding: const EdgeInsets.all(32.0),
+      padding: const EdgeInsets.only(top: 32.0, left: 32.0, right: 32.0, bottom: 16.0),
       child: Row(
         children: [
           Expanded(
@@ -73,6 +91,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+
     Column buildButtonColumn(IconData icon, String label) {
       Color color = Theme.of(context).primaryColor;
 
@@ -151,6 +170,7 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
           title: appBarTitle,
         ),
         body: ListView(
+          padding: const EdgeInsets.only(bottom: 32.0),
           children: [
             new SizedBox(
               width: 600.0,
@@ -168,8 +188,10 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
             Divider(),
             _buildProgram('I-Novice (English, Age 12-16)',
                 'Sat 7 Jul - Sun 5 Aug 2018 (30 Days)'),
+            Divider(),
           ],
         ),
+        floatingActionButton: buildFloatingActionButton(),
         drawer: Navigation());
   }
 }
