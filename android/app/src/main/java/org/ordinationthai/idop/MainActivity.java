@@ -1,4 +1,4 @@
-package com.me.flutterlayout;
+package org.ordinationthai.idop;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

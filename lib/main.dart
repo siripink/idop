@@ -1,4 +1,5 @@
 import 'package:carousel/carousel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_idop/navigation.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         accentColor: const Color(0xFFff5722),
         canvasColor: const Color(0xFFfafafa),
       ),
-      home: HomePage(),
+      home: new HomePage(),
     );
   }
 }
@@ -28,12 +29,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Widget _buildProgram(String title, String subTitle) {
+  Widget _buildProgram(DocumentSnapshot document) {
     return Container(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0),
       child: ListTile(
-        title: Text(title, style: TextStyle(fontWeight: FontWeight.w500)),
-        subtitle: Text(subTitle),
+        title: Text(document['name'],
+            style: TextStyle(fontWeight: FontWeight.w500)),
+        subtitle: Text(document['period']),
         leading: Icon(
           Icons.calendar_today,
           color: Colors.deepOrangeAccent,
@@ -48,21 +50,25 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildFloatingActionButton() {
     return new FloatingActionButton(
-        key: new ValueKey<Color>(Colors.red),
-        tooltip: 'Apply',
-        backgroundColor: Colors.blueGrey,
-        child: Text('APPLY',
-          style: TextStyle(
+      key: new ValueKey<Color>(Colors.red),
+      tooltip: 'Apply',
+      backgroundColor: Colors.blueGrey,
+      child: Text(
+        'APPLY',
+        style: TextStyle(
           fontSize: 12.0,
-        ),),
-        onPressed: _showExplanatoryText
+        ),
+      ),
+      onPressed: _showExplanatoryText,
     );
   }
 
   @override
   Widget build(BuildContext context) {
+
     Widget titleSection = Container(
-      padding: const EdgeInsets.only(top: 32.0, left: 32.0, right: 32.0, bottom: 16.0),
+      padding: const EdgeInsets.only(
+          top: 24.0, left: 32.0, right: 32.0, bottom: 12.0),
       child: Row(
         children: [
           Expanded(
@@ -88,40 +94,6 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-        ],
-      ),
-    );
-
-    Column buildButtonColumn(IconData icon, String label) {
-      Color color = Theme.of(context).primaryColor;
-
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, color: color),
-          Container(
-            margin: const EdgeInsets.only(top: 8.0),
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 12.0,
-                fontWeight: FontWeight.w400,
-                color: color,
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-
-    Widget buttonSection = Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          buildButtonColumn(Icons.call, 'CONTACT'),
-          buildButtonColumn(Icons.near_me, 'DIRECTION'),
-          buildButtonColumn(Icons.share, 'SHARE'),
         ],
       ),
     );
@@ -156,8 +128,8 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    Widget textSection = Container(
-      padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 32.0),
+    Widget descriptionSection = Container(
+      padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 18.0),
       child: Text(
         '''
 Once in life time, having ordination to be Buddhist monk with IDOP Program. You will learn more how to find your real happiness for your life as well as how to help buildup permanent peace for the world.        ''',
@@ -165,30 +137,55 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
       ),
     );
 
+    Widget bannerImages = new SizedBox(
+      width: 600.0,
+      height: 200.0,
+      child: new Stack(children: <Widget>[
+        new PageView(
+          children: [bannerCarousel],
+        ),
+      ]),
+    );
+
+    Widget currentProgram = new Container(
+      height: 200.0,
+      child: new StreamBuilder(
+          stream: Firestore.instance
+              .collection('Programs')
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData)
+              return const Text('Loading...');
+            return new ListView.builder(
+              physics: ClampingScrollPhysics(),
+              //Hide Overscoll Effect on the nested listview
+              itemCount: snapshot.data.documents.length,
+              padding: const EdgeInsets.only(top: 10.0),
+              itemExtent: 55.0,
+              itemBuilder: (context, index) =>
+                  _buildProgram(snapshot.data.documents[index]),
+            );
+          }),
+    );
+
     return new Scaffold(
         appBar: AppBar(
           title: appBarTitle,
         ),
-        body: ListView(
-          padding: const EdgeInsets.only(bottom: 32.0),
-          children: [
-            new SizedBox(
-              width: 600.0,
-              height: 300.0,
-              child: new Stack(children: <Widget>[
-                new PageView(
-                  children: [bannerCarousel],
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverList(
+              delegate: SliverChildListDelegate([
+                new Column(
+                  children: <Widget>[
+                    bannerImages,
+                    titleSection,
+                    descriptionSection,
+                    currentProgram
+                  ],
                 ),
               ]),
-            ),
-            titleSection,
-            textSection,
-            _buildProgram('IDOP #16 (English/Chinese)',
-                'Sat 7 July - Sat 18 August 2018 (43 Days)'),
-            Divider(),
-            _buildProgram('I-Novice (English, Age 12-16)',
-                'Sat 7 Jul - Sun 5 Aug 2018 (30 Days)'),
-            Divider(),
+            )
           ],
         ),
         floatingActionButton: buildFloatingActionButton(),
