@@ -134,6 +134,7 @@ class _HomePageState extends State<HomePage> {
         '''
 Once in life time, having ordination to be Buddhist monk with IDOP Program. You will learn more how to find your real happiness for your life as well as how to help buildup permanent peace for the world.        ''',
         softWrap: true,
+        textAlign: TextAlign.justify,
       ),
     );
 
