@@ -139,7 +139,7 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
 
     Widget bannerImages = new SizedBox(
       width: 600.0,
-      height: 200.0,
+      height: 220.0,
       child: new Stack(children: <Widget>[
         new PageView(
           children: [bannerCarousel],
