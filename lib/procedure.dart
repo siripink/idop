@@ -23,7 +23,7 @@ class _ProcedureState extends State<Procedure> {
                     child: Text(
                       details,
                       textAlign: TextAlign.justify,
-                      style: Theme.of(context).textTheme.body1,
+                      style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54),
                     ))),
             new Image.asset(
               assets,
@@ -48,7 +48,7 @@ class _ProcedureState extends State<Procedure> {
           Utils.buildDescription(context,
               '''
 The ordination ceremony (with some small variations from place to place) follows the following stages. You will have the chance to familiarize yourself with the stages in rehearsal during the week before your ordination. '''),
-          Utils.buildheadTitle('The Circumanbulation'),
+          Utils.buildTitle('The Circumanbulation'),
           Utils.buildDescription(context,
               '''
 The circumambulation is a ceremony to pay respect to the Triple Gem. By circumanbulating the chapel, clock wise, in procession is to contemplate the great virtue of the Lord of Buddha, the Dhamma and the Sangha.'''),

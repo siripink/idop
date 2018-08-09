@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                 Text(
                   'Patumthani, Thailand',
                   style: TextStyle(
-                    color: Colors.grey[500],
+                    color: Colors.grey[600],
                   ),
                 ),
               ],

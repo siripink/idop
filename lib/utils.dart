@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Utils {
 
-  static Widget buildheadTitle(String title) {
+  static Widget buildTitle(String title) {
     return Container(
       padding: const EdgeInsets.only(left: 16.0, top: 18.0),
       child: Text(title,
@@ -20,7 +20,7 @@ class Utils {
       child: Text(
         description,
         textAlign: TextAlign.justify,
-        style: Theme.of(context).textTheme.body1,
+        style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54),
         softWrap: true,
       ),
     );
