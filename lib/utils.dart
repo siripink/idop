@@ -5,10 +5,10 @@ class Utils {
 
   static Widget buildTitle(String title) {
     return Container(
-      padding: const EdgeInsets.only(left: 16.0, top: 18.0),
+      padding: const EdgeInsets.only(top: 18.0),
       child: Text(title,
           style: TextStyle(
-            fontSize: 15.0,
+            fontSize: 18.0,
             fontWeight: FontWeight.bold,
           )),
     );
@@ -16,7 +16,7 @@ class Utils {
 
   static Widget buildDescription(BuildContext context, String description) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(16.0, 18.0, 16.0, 0.0),
+      padding: const EdgeInsets.only(top: 18.0),
       child: Text(
         description,
         textAlign: TextAlign.justify,

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_idop/application.dart';
 import 'package:flutter_idop/chanting.dart';
 import 'package:flutter_idop/procedure.dart';
+import 'package:flutter_idop/program.dart';
+import 'package:flutter_idop/eligibility.dart';
+import 'package:flutter_idop/contactUs.dart';
 
 class DrawerItem {
   String title;
@@ -38,15 +41,17 @@ class _NavigationState extends State<Navigation> {
           ListTile(
             title: Text('Training'),
           ),
-          buildMenu('Program & schedules', 'action'),
+          buildMenu('Program & schedules', 'program'),
           buildMenu('Procedure', 'procedure'),
           buildMenu('Chanting script & audio', 'chanting'),
           buildMenu('Eligibility', 'eligibility'),
           new Divider(),
           ListTile(
             title: Text('Online Application'),
-            onTap: () => _navigateTo('Application'),
+            onTap: () => _navigateTo('application'),
           ),
+          new Divider(),
+          buildMenu('Contact Us', 'contact'),
         ],
       ),
     );
@@ -58,15 +63,24 @@ class _NavigationState extends State<Navigation> {
     Navigator.of(context).push(MaterialPageRoute<Null>(
       builder: (BuildContext context) {
         switch (title) {
+          case 'program':
+            return Program();
+            break;
           case 'procedure':
             return Procedure();
             break;
           case 'chanting':
             return Chanting();
             break;
+          case 'eligibility':
+            return Eligibility();
+            break;
           case 'application':
             return Application();
             break;
+          case 'contact':
+          return ContactUs();
+          break;
         }
       },
     ));

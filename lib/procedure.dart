@@ -13,7 +13,7 @@ class _ProcedureState extends State<Procedure> {
 
   Widget buildCustomListTile(String assets, String details) {
     return Container(
-        padding: const EdgeInsets.fromLTRB(16.0, 18.0, 16.0, 0.0),
+        padding: EdgeInsets.only(top: 18.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -43,7 +43,7 @@ class _ProcedureState extends State<Procedure> {
       ),
       body: ListView(
         // Important: Remove any padding from the ListView.
-        padding: EdgeInsets.zero,
+        padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
         children: <Widget>[
           Utils.buildDescription(context,
               '''

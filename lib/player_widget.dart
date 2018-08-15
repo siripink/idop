@@ -78,7 +78,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
           mainAxisSize: MainAxisSize.min,
           children: [
             new Padding(
-              padding: new EdgeInsets.all(12.0),
+              padding: new EdgeInsets.all(10.0),
               child: new Stack(
                 children: [
                   new CircularProgressIndicator(

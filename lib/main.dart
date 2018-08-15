@@ -153,6 +153,7 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
       child: new StreamBuilder(
           stream: Firestore.instance
               .collection('Programs')
+              .where('active', isEqualTo: true)
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)
