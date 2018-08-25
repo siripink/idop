@@ -8,16 +8,12 @@ class Program extends StatefulWidget {
 
 class _ProgramState extends State<Program> {
 
-  Widget appBarTitle = Container(
-      margin: const EdgeInsets.only(left: 8.0),
-      child: Text('Program'));
-
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
-        title: appBarTitle,
+        title: Text('Program'),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),

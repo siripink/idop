@@ -19,9 +19,6 @@ class _FormData {
 
 class _ContactUsState extends State<ContactUs> {
   String status = "";
-  Widget appBarTitle = Container(
-      margin: const EdgeInsets.only(left: 8.0),
-      child: Text('Contact Us'));
 
   final GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   _FormData _data = new _FormData();
@@ -97,9 +94,7 @@ class _ContactUsState extends State<ContactUs> {
     final Size screenSize = MediaQuery.of(context).size;
 
     return new Scaffold(
-      appBar: AppBar(
-        title: appBarTitle,
-      ),
+      appBar: new AppBar(title: Text('Contact Us')),
       body: new Container(
           padding: new EdgeInsets.all(20.0),
           child: new Form(

@@ -7,9 +7,6 @@ class Procedure extends StatefulWidget {
 }
 
 class _ProcedureState extends State<Procedure> {
-  Widget appBarTitle = Container(
-      margin: const EdgeInsets.only(left: 8.0),
-      child: Text('Procedure'));
 
   Widget buildCustomListTile(String assets, String details) {
     return Container(
@@ -39,7 +36,7 @@ class _ProcedureState extends State<Procedure> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: appBarTitle,
+        title: Text('Procedure'),
       ),
       body: ListView(
         // Important: Remove any padding from the ListView.

@@ -41,10 +41,6 @@ class _LinkInAppTextSpan extends TextSpan {
 
 class _EligibilityState extends State<Eligibility> {
 
-  Widget appBarTitle = Container(
-      margin: const EdgeInsets.only(left: 8.0),
-      child: Text('Eligibility'));
-
   Widget buildBullet(String text) {
   return new ListTile(
     title: Text(
@@ -89,7 +85,7 @@ class _EligibilityState extends State<Eligibility> {
 
     return Scaffold(
       appBar: AppBar(
-        title: appBarTitle,
+        title: Text('Eligibility'),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),

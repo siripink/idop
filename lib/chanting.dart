@@ -8,9 +8,6 @@ class Chanting extends StatefulWidget {
 }
 
 class _ChantingState extends State<Chanting> {
-  Widget appBarTitle = Container(
-      margin: const EdgeInsets.only(left: 8.0),
-      child: Text('Chanting'));
 
   Widget buildCard(double height, String scriptIndex, String asset, String title, String details) {
     return new SafeArea(
@@ -115,7 +112,7 @@ class _ChantingState extends State<Chanting> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: appBarTitle,
+        title: Text('Chanting'),
       ),
       body: ListView(
         // Important: Remove any padding from the ListView.

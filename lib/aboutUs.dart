@@ -9,16 +9,12 @@ class AboutUs extends StatefulWidget {
 
 class _AboutUsState extends State<AboutUs> {
 
-  Widget appBarTitle = Container(
-      margin: const EdgeInsets.only(left: 8.0),
-      child: Text('About Us'));
-
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
-        title: appBarTitle,
+        title: Text('About Us'),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),

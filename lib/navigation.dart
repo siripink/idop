@@ -62,6 +62,7 @@ class _NavigationState extends State<Navigation> {
             onTap: () => _navigateTo('about'),
           ),
           buildMenu('Contact Us', 'contact'),
+          buildMenu('About Us', 'about'),
           buildMenu('FAQ', 'faq'),
 
         ],

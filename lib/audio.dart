@@ -13,15 +13,12 @@ class Audio extends StatefulWidget {
 }
 
 class _AudioState extends State<Audio> {
-  Widget appBarTitle = Container(
-      margin: const EdgeInsets.only(left: 8.0),
-      child: Text('Ordination Chanting (Ukasa style)'));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: appBarTitle,
+        title: Text('Ordination Chanting (Ukasa style)'),
       ),
       body: ListView(
         padding: const EdgeInsets.only(left: 18.0, right: 16.0, bottom: 12.0),
