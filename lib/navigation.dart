@@ -4,7 +4,9 @@ import 'package:flutter_idop/chanting.dart';
 import 'package:flutter_idop/procedure.dart';
 import 'package:flutter_idop/program.dart';
 import 'package:flutter_idop/eligibility.dart';
+import 'package:flutter_idop/aboutUs.dart';
 import 'package:flutter_idop/contactUs.dart';
+import 'package:flutter_idop/faq.dart';
 
 class DrawerItem {
   String title;
@@ -25,7 +27,11 @@ class _NavigationState extends State<Navigation> {
       // Add a ListView to the drawer. This ensures the user can scroll
       // through the options in the Drawer if there isn't enough vertical
       // space to fit everything.
-      child: ListView(
+      child:
+        new Container(
+          color: Colors.orange[100],
+          child:
+      ListView(
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
         children: <Widget>[
@@ -35,7 +41,7 @@ class _NavigationState extends State<Navigation> {
               fit: BoxFit.fitWidth,
             ),
             decoration: BoxDecoration(
-              color: Colors.deepOrange[300],
+              color: Colors.white,
             ),
           ),
           ListTile(
@@ -45,15 +51,22 @@ class _NavigationState extends State<Navigation> {
           buildMenu('Procedure', 'procedure'),
           buildMenu('Chanting script & audio', 'chanting'),
           buildMenu('Eligibility', 'eligibility'),
+//          new Divider(),
+//          ListTile(
+//            title: Text('Online Application'),
+//            onTap: () => _navigateTo('application'),
+//          ),
           new Divider(),
           ListTile(
-            title: Text('Online Application'),
-            onTap: () => _navigateTo('application'),
+            title: Text('About Us'),
+            onTap: () => _navigateTo('about'),
           ),
-          new Divider(),
           buildMenu('Contact Us', 'contact'),
+          buildMenu('FAQ', 'faq'),
+
         ],
       ),
+        )
     );
   }
 
@@ -78,9 +91,15 @@ class _NavigationState extends State<Navigation> {
           case 'application':
             return Application();
             break;
+          case 'about':
+            return AboutUs();
+            break;
           case 'contact':
-          return ContactUs();
-          break;
+            return ContactUs();
+            break;
+          case 'faq':
+            return FAQ();
+            break;
         }
       },
     ));
