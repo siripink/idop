@@ -40,7 +40,7 @@ class _LinkInAppTextSpan extends TextSpan {
 }
 
 class _EligibilityState extends State<Eligibility> {
-
+  
   Widget buildBullet(String text) {
   return new ListTile(
     title: Text(

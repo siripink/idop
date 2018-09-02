@@ -9,6 +9,7 @@ class FAQ extends StatelessWidget {
     return new Scaffold(
         appBar: new AppBar(title: Text('FAQ')),
         body: new ListView(
+            padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 16.0),
             children: <Widget>[
               new ExpansionTile(
                   title: const Text('Is it possible to eat only vegetarian food at Wat Dhammakaya? Can I bring my own food?'),

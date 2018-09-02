@@ -27,7 +27,7 @@ class _ContactUsState extends State<ContactUs> {
     // If empty value, the isEmail function throw a error.
     // So I changed this function with try and catch.
     try {
-      Validate.isEmail(value);
+      Validate.isEmail(value.trim());
     } catch (e) {
       return 'The E-mail Address must be a valid email address.';
     }
@@ -48,46 +48,55 @@ class _ContactUsState extends State<ContactUs> {
     if (this._formKey.currentState.validate()) {
       _formKey.currentState.save(); // Save our form now.
 
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return  new Dialog(
+          child: new Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+          new Padding(
+          padding: new EdgeInsets.all(16.0),
+            child: new CircularProgressIndicator()
+          ),
+              new Text("Loading..."),
+            ],
+          ),
+        );
+        }
+      );
+
       print('Printing the form data.');
       print('Email: ${_data.email}');
       print('Name: ${_data.name}');
 
-//      Widget result = new FutureBuilder<List<User>>(
-//        future: fetchUsersFromGitHub(),
-//        builder: (context, snapshot) {
-//
-//          if (snapshot.hasData) {
-//            return new ListView.builder(
-//                itemCount: snapshot.data.length,
-//                itemBuilder: (context, index) {
-//                  return new Column(
-//                      crossAxisAlignment: CrossAxisAlignment.start,
-//                      children: <Widget>[
-//                        new Text(snapshot.data[index].name,
-//                            style: new TextStyle(fontWeight: FontWeight.bold)),
-//                        new Divider()
-//                      ]
-//                  );
-//                }
-//            );
-//          } else if (snapshot.hasError) {
-//            return new Text("${snapshot.error}");
-//          }
-//
-//          // By default, show a loading spinner
-//          return new CircularProgressIndicator();
-//        },
-//      ),
+      sendEmail();
     }
   }
 
-//  Future<List<User>> fetchUsersFromGitHub() async {
-//    final response = await http.get('http://api.ordinationthai.org/login');
-//    print(response.body);
-//    List responseJson = json.decode(response.body.toString());
-//    List<User> userList = createUserList(responseJson);
-//    return userList;
-//  }
+  sendEmail() async {
+    Map<String, String> body = {
+      'name': '${_data.name}',
+      'email': '${_data.email}',
+      'subject': '${_data.subject}',
+      'message': '${_data.message}',
+    };
+    final response = await http.post('http://api.ordinationthai.org/contactUs', body: body);
+    Map data = json.decode(response.body.toString());
+    String apiStatus = data['status'];
+    String name = data['name'];
+    print("apiStatus:  $apiStatus, name: $name");
+
+    if (!mounted) return;
+
+    setState(() {
+      status = apiStatus;
+    });
+
+    Navigator.pop(context);
+    _formKey.currentState.reset();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +105,7 @@ class _ContactUsState extends State<ContactUs> {
     return new Scaffold(
       appBar: new AppBar(title: Text('Contact Us')),
       body: new Container(
-          padding: new EdgeInsets.all(20.0),
+          padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 20.0),
           child: new Form(
             key: this._formKey,
             child: new ListView(
@@ -160,7 +169,7 @@ The simplest way to come to Dhammakaya Temple the first time is to take a metere
                     ),
                     validator: this._validateEmail,
                     onSaved: (String value) {
-                      this._data.email = value;
+                      this._data.email = value.trim();
                     }
                 ),
                 new TextFormField(
@@ -199,6 +208,16 @@ The simplest way to come to Dhammakaya Temple the first time is to take a metere
                       top: 20.0
                   ),
                 ),
+            Container(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: new Text('$status',
+                    style: TextStyle(
+                      color: Colors.green[600],
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    )
+                ),
+            ),
                 new Divider(),
               ],
             ),
