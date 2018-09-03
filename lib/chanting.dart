@@ -121,6 +121,49 @@ class _ChantingState extends State<Chanting> {
           Utils.buildTitle('Chanting during circumambulation of the temple'),
           Utils.buildDescription(context,
               'After the third circumambulation, ordinands should enter the ordination ground in the single row. To paying homage to the ordination ground. The pure and holy boundary where Sangha attend Sanghakamma. Buddha image, which represent the Lord Buddha, was placed here.'),
+
+          new Card(
+            child: new Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                buildCardImage('images/1_Paying_Homage_to_the_ordination_ground_and_chapel2.jpg'),
+                // description and share/explore buttons
+
+              new Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0.0),
+              child: new Text(
+                  '1. Paying Homage to the ordination ground and chapel',
+               //   style: descriptionStyle.copyWith(fontSize: 15.0),
+                ),
+                ),
+                new Padding(
+                  padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0.0),
+                  child: new Text(
+                    'Paying Homage to Principle (main) Buddha image is to pay a highest respect to the Buddha image which represents the Lord of Buddha.',
+                    textAlign: TextAlign.justify,
+//                    style: descriptionStyle.copyWith(
+//                        color: Colors.black54,
+//                        fontSize: 14.0),
+                  ),
+                ),
+
+                new ButtonTheme.bar( // make buttons use the appropriate styles for cards
+                  child: new ButtonBar(
+                    children: <Widget>[
+                      new FlatButton(
+                        child: const Text('BUY TICKETS'),
+                        onPressed: () { /* ... */ },
+                      ),
+                      new FlatButton(
+                        child: const Text('LISTEN'),
+                        onPressed: () { /* ... */ },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
           buildCard(
             340.0,
               'script1',
