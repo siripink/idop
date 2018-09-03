@@ -183,6 +183,7 @@ The simplest way to come to Dhammakaya Temple the first time is to take a metere
                     }
                 ),
                 new TextFormField(
+                    maxLines: 5,
                     decoration: new InputDecoration(
                         hintText: 'your message',
                         labelText: 'Message'
