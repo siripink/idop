@@ -16,6 +16,8 @@ dependencies:
   url_launcher: 3.0.3
   validate: ^1.6.1
   http: ^0.11.3+16
+  firebase_analytics: ^1.0.3
+  flutter_youtube: "^1.1.0"
 
 dev_dependencies:
   flutter_test:
@@ -37,6 +39,7 @@ flutter:
   assets:
     - images/
     - images/banners/
+    - images/media/
     - assets/
 
   #  - images/a_dot_ham.jpeg

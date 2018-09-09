@@ -7,6 +7,8 @@ import 'package:flutter_idop/eligibility.dart';
 import 'package:flutter_idop/aboutUs.dart';
 import 'package:flutter_idop/contactUs.dart';
 import 'package:flutter_idop/faq.dart';
+import 'package:flutter_idop/tagging.dart';
+import 'package:flutter_idop/media.dart';
 
 class DrawerItem {
   String title;
@@ -63,6 +65,7 @@ class _NavigationState extends State<Navigation> {
           ),
           buildMenu('Contact Us', 'contact'),
           buildMenu('About Us', 'about'),
+          buildMenu('Media', 'media'),
           buildMenu('FAQ', 'faq'),
 
         ],
@@ -76,6 +79,8 @@ class _NavigationState extends State<Navigation> {
     Navigator.of(context).pop();
     Navigator.of(context).push(MaterialPageRoute<Null>(
       builder: (BuildContext context) {
+        Tagging tagging = new Tagging();
+        tagging.sendEvent('view_' + title);
         switch (title) {
           case 'program':
             return Program();
@@ -97,6 +102,9 @@ class _NavigationState extends State<Navigation> {
             break;
           case 'contact':
             return ContactUs();
+            break;
+          case 'media':
+            return Media();
             break;
           case 'faq':
             return FAQ();

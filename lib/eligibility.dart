@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter_idop/utils.dart';
 import 'package:flutter_idop/chanting.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_idop/tagging.dart';
 
 class Eligibility extends StatefulWidget {
   @override
@@ -15,6 +16,9 @@ class _LinkTextSpan extends TextSpan {
     text: text ?? url,
     recognizer: new TapGestureRecognizer()..onTap = () {
       launch(url, forceSafariVC: false);
+      print ("pin= "+ text.replaceAll("[()]", "_"));
+      //Tagging tagging = new Tagging();
+      //tagging.sendEvent('download_' + text.replaceAll("[ |\"|\(|\)]", "_"));
     }
   );
 }

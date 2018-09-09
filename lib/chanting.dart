@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_idop/audio.dart';
 import 'package:flutter_idop/utils.dart';
+import 'package:flutter_idop/tagging.dart';
 
 class Chanting extends StatefulWidget {
   @override
@@ -86,8 +87,8 @@ class _ChantingState extends State<Chanting> {
   }
 
   void _navigateTo(String title) {
-    //close the drawer
-    //Navigator.of(context).pop();
+    Tagging tagging = new Tagging();
+    tagging.sendEvent('listen_to_' + title);
     Navigator.of(context).push(MaterialPageRoute<Null>(
           builder: (context) => Audio(script: title),
         ));
