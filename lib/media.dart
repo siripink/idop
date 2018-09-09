@@ -11,6 +11,7 @@ class Media extends StatefulWidget {
 class _MediaState extends State<Media> {
 
   Tagging tagging = new Tagging();
+
   void playYoutubeVideoId(String videoId) {
     var youtube = new FlutterYoutube();
     tagging.sendEvent('youtube_' + videoId);
@@ -26,8 +27,7 @@ class _MediaState extends State<Media> {
       padding: const EdgeInsets.only(bottom: 24.0),
       child: ListTile(
         title: Text(title,
-            style: TextStyle(fontWeight: FontWeight.w500,
-                color: Colors.black54)),
+            style: TextStyle(fontSize: 15.0)),
         leading: new Image.asset(
           asset,
           fit: BoxFit.cover,

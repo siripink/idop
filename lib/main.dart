@@ -2,6 +2,9 @@ import 'package:carousel/carousel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_idop/navigation.dart';
+import 'package:flutter_idop/utils.dart';
+import 'package:flutter_idop/tagging.dart';
+import 'package:flutter_youtube/flutter_youtube.dart';
 
 void main() => runApp(new MyApp());
 
@@ -29,6 +32,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Tagging tagging = new Tagging();
+
   Widget _buildProgram(DocumentSnapshot document) {
     return Container(
       padding: const EdgeInsets.only(left: 16.0, right: 16.0),
@@ -60,6 +65,32 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       onPressed: _showExplanatoryText,
+    );
+  }
+
+  void playYoutubeVideoId(String videoId) {
+    var youtube = new FlutterYoutube();
+    tagging.sendEvent('home_youtube_' + videoId);
+
+    youtube.playYoutubeVideoById(
+      apiKey: "AIzaSyA7qu24iir7PE_Dmim4-wf_M2BhvsCgTB8",
+      videoId: videoId,
+    );
+  }
+
+  Widget buildPlayList(String title, String asset, String videoId) {
+    return Container(
+      padding: const EdgeInsets.only(left: 18.0, bottom: 24.0),
+      child: ListTile(
+        title: Text(title,
+            style: TextStyle(fontSize: 15.0)),
+        leading: new Image.asset(
+          asset,
+          fit: BoxFit.cover,
+          width: 100.0,
+        ),
+        onTap: () {playYoutubeVideoId(videoId);},
+      ),
     );
   }
 
@@ -183,7 +214,20 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
                     bannerImages,
                     titleSection,
                     descriptionSection,
-                    currentProgram
+                    new Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: new Text(''),
+                    ),
+                    buildPlayList('Introduction to ordination',
+                        'images/media/introduction.jpg',
+                        'LDs2wmaVcO8'
+                    ),
+                    buildPlayList('Training in IDOP',
+                        'images/media/training.jpg',
+                        'bFJWRhORfIA'
+                    ),
+                    currentProgram,
+
                   ],
                 ),
               ]),
