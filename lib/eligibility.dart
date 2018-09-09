@@ -11,14 +11,13 @@ class Eligibility extends StatefulWidget {
 }
 
 class _LinkTextSpan extends TextSpan {
-  _LinkTextSpan({String url, String text}) : super(
+  _LinkTextSpan({String url, String text, String tag}) : super(
     style: new TextStyle(color: Colors.deepOrange),
     text: text ?? url,
     recognizer: new TapGestureRecognizer()..onTap = () {
       launch(url, forceSafariVC: false);
-      print ("pin= "+ text.replaceAll("[()]", "_"));
-      //Tagging tagging = new Tagging();
-      //tagging.sendEvent('download_' + text.replaceAll("[ |\"|\(|\)]", "_"));
+      Tagging tagging = new Tagging();
+      tagging.sendEvent('download_' + tag);
     }
   );
 }
@@ -105,7 +104,8 @@ class _EligibilityState extends State<Eligibility> {
 The International Dhammadayada Training & Ordination Program is designed to help participants achieve personal success during four weeks of training. Please see our web page called ''',
                      ),
                     new _LinkTextSpan(text: '"Monastic Code for Ordination" (pdf)',
-                        url: 'https://ordinationthai.org/wp-content/uploads/2015/05/Vinaya-for-Ordination.pdf'),
+                        url: 'https://ordinationthai.org/wp-content/uploads/2015/05/Vinaya-for-Ordination.pdf',
+                        tag: 'monastic_code_pdf'),
                     new TextSpan(text: ' regarding a complete list of restrictions for ordination. We require all applicants to be:',
                     ),
                   ]
@@ -151,7 +151,8 @@ In order to improve the international experience for all IDOP participants, resi
 
 You can download '''),
                     new _LinkTextSpan(text: '"Ordination Chanting (Ukasa style)" (pdf)',
-                        url: 'https://ordinationthai.org/download/ordination-chanting-english/?wpdmdl=736'),
+                        url: 'https://ordinationthai.org/download/ordination-chanting-english/?wpdmdl=736',
+                        tag: 'chanting_pdf'),
                     new TextSpan(text: ' to practice the ordination chanting. For practicing the chanting with audio, please visit: '),
                       new _LinkInAppTextSpan(context: context,
                       text: 'the Chanting page'),
@@ -170,10 +171,12 @@ Here are two meditation sessions by Phra Nicholas Thanissaro you can use to prac
 -  Meditation for beginners (The seven bases of the mind) - MP3
 
 ''',
-                        url: 'https://ordinationthai.org/download/meditation-for-beginners-seven-bases-of-the-mind/?wpdmdl=752'),
+                        url: 'https://ordinationthai.org/download/meditation-for-beginners-seven-bases-of-the-mind/?wpdmdl=752',
+                        tag: 'seven_bases_mp3'),
                     new _LinkTextSpan(text: '''
 -  Dhammakaya meditation for beginners (The center of the body) - MP3''',
-                        url: 'https://ordinationthai.org/download/meditation-for-beginners-center/?wpdmdl=750'),
+                        url: 'https://ordinationthai.org/download/meditation-for-beginners-center/?wpdmdl=750',
+                        tag: 'center_mp3'),
                   ]
               )),
 
