@@ -2,7 +2,7 @@ import 'package:carousel/carousel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_idop/navigation.dart';
-import 'package:flutter_idop/utils.dart';
+import 'package:flutter_idop/config/keys.dart';
 import 'package:flutter_idop/tagging.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
 
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
     tagging.sendEvent('home_youtube_' + videoId);
 
     youtube.playYoutubeVideoById(
-      apiKey: "AIzaSyA7qu24iir7PE_Dmim4-wf_M2BhvsCgTB8",
+      apiKey: youTubeKey,
       videoId: videoId,
     );
   }

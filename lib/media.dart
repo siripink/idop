@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_idop/utils.dart';
+import 'package:flutter_idop/config/keys.dart';
 import 'package:flutter_idop/tagging.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
 
@@ -17,7 +18,7 @@ class _MediaState extends State<Media> {
     tagging.sendEvent('youtube_' + videoId);
 
     youtube.playYoutubeVideoById(
-      apiKey: "AIzaSyA7qu24iir7PE_Dmim4-wf_M2BhvsCgTB8",
+      apiKey: youTubeKey,
       videoId: videoId,
     );
   }
