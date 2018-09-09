@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_idop/audio.dart';
 import 'package:flutter_idop/utils.dart';
 import 'package:flutter_idop/tagging.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
@@ -11,9 +10,10 @@ class Media extends StatefulWidget {
 
 class _MediaState extends State<Media> {
 
-
+  Tagging tagging = new Tagging();
   void playYoutubeVideoId(String videoId) {
     var youtube = new FlutterYoutube();
+    tagging.sendEvent('youtube_' + videoId);
 
     youtube.playYoutubeVideoById(
       apiKey: "AIzaSyA7qu24iir7PE_Dmim4-wf_M2BhvsCgTB8",
