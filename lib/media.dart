@@ -20,6 +20,7 @@ class _MediaState extends State<Media> {
     youtube.playYoutubeVideoById(
       apiKey: youTubeKey,
       videoId: videoId,
+      autoPlay: true
     );
   }
 

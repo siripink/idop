@@ -30,6 +30,9 @@ PODS:
   - Firebase/RemoteConfig (5.4.0):
     - Firebase/Core
     - FirebaseRemoteConfig (= 3.0.0)
+  - firebase_analytics (0.0.1):
+    - Firebase/Core
+    - Flutter
   - firebase_core (0.0.1):
     - Firebase/Core
     - Flutter
@@ -75,6 +78,9 @@ PODS:
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - Protobuf (~> 3.5)
   - Flutter (1.0.0)
+  - flutter_youtube (0.0.1):
+    - Flutter
+    - XCDYouTubeKit
   - GoogleToolboxForMac/Defines (2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
@@ -111,13 +117,16 @@ PODS:
   - Protobuf (3.6.0)
   - url_launcher (0.0.1):
     - Flutter
+  - XCDYouTubeKit (2.5.6)
 
 DEPENDENCIES:
   - audioplayers (from `.symlinks/plugins/audioplayers/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
+  - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_remote_config (from `.symlinks/plugins/firebase_remote_config/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_youtube (from `.symlinks/plugins/flutter_youtube/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
@@ -142,18 +151,23 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+    - XCDYouTubeKit
 
 EXTERNAL SOURCES:
   audioplayers:
     :path: ".symlinks/plugins/audioplayers/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
+  firebase_analytics:
+    :path: ".symlinks/plugins/firebase_analytics/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_remote_config:
     :path: ".symlinks/plugins/firebase_remote_config/ios"
   Flutter:
     :path: ".symlinks/flutter/ios"
+  flutter_youtube:
+    :path: ".symlinks/plugins/flutter_youtube/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   url_launcher:
@@ -164,6 +178,7 @@ SPEC CHECKSUMS:
   BoringSSL: cf3f1793eb6e3c445c4d150456341f149c268a35
   cloud_firestore: a2d49d9c7219fce31033eb1a2ee953d7733c91d6
   Firebase: d66f4f29c23f22d96808d9abc174d81d8eee968f
+  firebase_analytics: fcc60a9de4b8e07aa5af8941303a7f5fe6e0383f
   firebase_core: c96aa8b2fcf7f5167d32f22034f502f9304952b8
   firebase_remote_config: 237de54ea095a512fbf7ee93ff36910e175b0c7b
   FirebaseABTesting: 1f50b8d50f5e3469eea54e7463a7b7fe221d1f5e
@@ -175,6 +190,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
   FirebaseRemoteConfig: 3c57e4644bd6976b671ae0b725cd709f198bd1f5
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  flutter_youtube: e237870de392a5ee800e9c36a13796ed887718b2
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   gRPC: 81b990caa01d7c32605d300c2ffd1b5ba0ef9e49
   gRPC-Core: a56b086a8ef5ced6f6ba5be5bc0a63fca185015a
@@ -186,6 +202,7 @@ SPEC CHECKSUMS:
   path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
   Protobuf: 0fc0ad8bec688b2a3017a139953e01374fedbd5f
   url_launcher: 92b89c1029a0373879933c21642958c874539095
+  XCDYouTubeKit: dccfe0c17dd5c5187969ec27e93069573badb08f
 
 PODFILE CHECKSUM: 1e5af4103afd21ca5ead147d7b81d06f494f51a2
 

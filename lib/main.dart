@@ -1,4 +1,4 @@
-import 'package:carousel/carousel.dart';
+import 'package:flutter_idop/carousel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_idop/navigation.dart';
@@ -39,7 +39,8 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.only(left: 16.0, right: 16.0),
       child: ListTile(
         title: Text(document['name'],
-            style: TextStyle(fontWeight: FontWeight.w500)),
+            style: TextStyle(fontWeight: FontWeight.w500,
+              fontSize: 15.0,)),
         subtitle: Text(document['period']),
         leading: Icon(
           Icons.calendar_today,
@@ -75,7 +76,10 @@ class _HomePageState extends State<HomePage> {
     youtube.playYoutubeVideoById(
       apiKey: youTubeKey,
       videoId: videoId,
+      autoPlay: true,
+      fullScreen: true
     );
+
   }
 
   Widget buildPlayList(String title, String asset, String videoId) {
@@ -169,6 +173,25 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
       ),
     );
 
+    Widget titleProgram = Container(
+      padding: const EdgeInsets.only( top: 8.0, left: 32.0, right: 32.0),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Current Programs',
+                style: TextStyle(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
     Widget bannerImages = new SizedBox(
       width: 600.0,
       height: 220.0,
@@ -226,6 +249,8 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
                         'images/media/training.jpg',
                         'bFJWRhORfIA'
                     ),
+                    Divider(),
+                    titleProgram,
                     currentProgram,
 
                   ],
@@ -234,7 +259,7 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
             )
           ],
         ),
-        floatingActionButton: buildFloatingActionButton(),
+        //floatingActionButton: buildFloatingActionButton(),
         drawer: Navigation());
   }
 }
