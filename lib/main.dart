@@ -77,7 +77,6 @@ class _HomePageState extends State<HomePage> {
       apiKey: youTubeKey,
       videoId: videoId,
       autoPlay: true,
-      fullScreen: true
     );
 
   }
@@ -244,10 +243,6 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
                     buildPlayList('Introduction to ordination',
                         'images/media/introduction.jpg',
                         'LDs2wmaVcO8'
-                    ),
-                    buildPlayList('Training in IDOP',
-                        'images/media/training.jpg',
-                        'bFJWRhORfIA'
                     ),
                     Divider(),
                     titleProgram,
