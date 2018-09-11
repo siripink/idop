@@ -26,7 +26,7 @@ class _MediaState extends State<Media> {
 
   Widget buildPlayList(String title, String asset, String videoId) {
     return Container(
-      padding: const EdgeInsets.only(bottom: 24.0),
+      padding: const EdgeInsets.only(bottom: 30.0),
       child: ListTile(
         title: Text(title,
             style: TextStyle(fontSize: 15.0)),
@@ -57,29 +57,18 @@ class _MediaState extends State<Media> {
             padding: const EdgeInsets.only(top: 4.0),
             child: new Text(''),
           ),
+          //https://img.youtube.com/vi/aHX6wyDcZ3Y/default.jpg
           buildPlayList('Introduction to ordination',
               'images/media/introduction.jpg',
               'LDs2wmaVcO8'
-          ),
-          buildPlayList('Training in IDOP',
-              'images/media/training.jpg',
-              'bFJWRhORfIA'
           ),
           buildPlayList('Ordain ritual in IDOP',
               'images/media/ritual.jpg',
               'kjmQYAddUos'
           ),
-          buildPlayList('Stages in the ordination ceremony IDOP',
-              'images/media/ceremony.jpg',
-              '1N8og8nu07g'
-          ),
           buildPlayList('Once in a life time, Howard McCrary',
               'images/media/howard.jpg',
               'Ig5e6qc0owg'
-          ),
-          buildPlayList('Ordination experience, Howard McCrary',
-              'images/media/howard2.jpg',
-              '94a5DILXteA'
           ),
           new Divider(),
           Utils.buildTitle('Past Event'),
@@ -91,45 +80,17 @@ class _MediaState extends State<Media> {
               'images/media/past1.jpg',
               'BLzPvoTKmlc'
           ),
-          buildPlayList('The best life - William Goh',
-              'images/media/william.jpg',
-              'uAHIGC0YcHU'
-          ),
-          buildPlayList('IDOP (Chinese)',
-              'images/media/past3.jpg',
-              'w5nqI2_rlK4'
-          ),
-          buildPlayList('IDOP #10',
-              'images/media/idop10.jpg',
-              'L7q4R35nbCQ'
-          ),
           buildPlayList('IDOP #11',
               'images/media/idop11.jpg',
               'p4SKxMfOuFg'
           ),
-          buildPlayList('IDOP #12 (Ep.1)',
-              'images/media/idop12_ep1.jpg',
-              'MXE5RANWEAU'
+          buildPlayList('IDOP #15 (Ep.1)',
+              'images/media/idop15.jpg',
+              'hm6l9WJLJbY'
           ),
-          buildPlayList('IDOP #12 (Byeong-Je Scoop)',
-              'images/media/idop12.jpg',
-              'e7J7chY1x_M'
-          ),
-          buildPlayList('IDOP #13 (Ep.1)',
-              'images/media/idop13_ep1.jpg',
-              '8wkMZr2RPb8'
-          ),
-          buildPlayList('IDOP #13 (Ep.2)',
-              'images/media/idop13.jpg',
-              'bnEkcYKbiNk'
-          ),
-          buildPlayList('IDOP Myanmar #1',
-              'images/media/idop_myanmar.jpg',
-              'E6gMIlLpoyk'
-          ),
-          buildPlayList('IDOP Interview',
-              'images/media/interview.jpg',
-              'OF9GmC3uQjU'
+          buildPlayList('IDOP #16 Asking for forgiveness, robe offering ceremony',
+              'images/media/idop16.jpg',
+              'aHX6wyDcZ3Y'
           ),
           new Divider(),
         ],
