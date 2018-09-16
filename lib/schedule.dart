@@ -9,70 +9,45 @@ class Schedule extends StatefulWidget {
 
 class _ScheduleState extends State<Schedule> {
 
-  Widget buildEvent(DocumentSnapshot document) {
-    for (var i = 0; i < 3; i++) {
-      return Row (
-          children: [
-            Text('Language'),
-            Text(document['language'])
-          ]
-      );
-    }
-  }
-
-  Widget buildSchedule(List<DocumentSnapshot> document) {
-    //var documentSize = document.data.length;
-    return Container(
-      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: buildScheduleDetail()
-//          [
-//            Text(document['title'],
-//                style: TextStyle(fontWeight: FontWeight.w500,
-//                  fontSize: 15.0,)
-//            ),
-//            Divider(),
-//            ListTile(
-//              title: new Text('Training Period'),
-//              subtitle: new Text(document['period']),
-//            ),
-//            ListTile(
-//              title: new Text('Language'),
-//              subtitle: new Text(document['language']),
-//            ),
-//
-//            //buildEvent(document)
-//
-//          ]
-      ),
-    );
-  }
-
-  List<Widget> buildScheduleDetail() {
+  List<Widget> buildScheduleDetail(List<DocumentSnapshot> documents) {
       List<Widget> list = new List();
-      list.add(new ListTile(
-        title: new Text('Training Period'),
-        subtitle: new Text('period'),
-      ));
-      list.add(new ListTile(
-        title: new Text('Training Period'),
-        subtitle: new Text('period'),
-      ));
+      for (var document in documents) {
+        list.add(Utils.buildTitle(document['title']));
+        list.add(Utils.buildDescription(context,'${document['period']}\n${document['language']}'));
+
+        var eventSize = document.data.length;
+        for (var idx = 1; idx < eventSize; idx++) {
+          if (!document.data.containsKey('schedule${idx}'))
+            break;
+
+          list.add(new ListTile(
+            dense: true,
+            leading: new Container(
+                width: 100.0,
+                child: Text(document['schedule${idx}']['time'])
+            ),
+            title: Text(document['schedule${idx}']['event'],
+                style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54)),
+          ));
+        }
+        list.add(new Divider());
+      }
+
       return list;
   }
+
   @override
   Widget build(BuildContext context) {
-
 
     Widget buildCurrentSchedule = new StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection('Schedules').where('active', isEqualTo: true).snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData)
-          return new Text('Loading...');
+          return new Text('Coming Soon...');
         else {
-          return new Container(
-              child: buildSchedule(snapshot.data.documents)
+          return new Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: buildScheduleDetail(snapshot.data.documents)
           );
         }
       }
@@ -119,9 +94,9 @@ class _ScheduleState extends State<Schedule> {
 
 21.30             Sleep in Peace
 '''),
-
           new Divider(),
           buildCurrentSchedule,
+
         ],
       ),
     );
