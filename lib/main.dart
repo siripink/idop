@@ -210,7 +210,7 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData)
-              return const Text('Loading...');
+              return const Text('Coming soon...');
             return new ListView.builder(
               physics: ClampingScrollPhysics(),
               //Hide Overscoll Effect on the nested listview

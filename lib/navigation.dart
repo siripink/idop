@@ -3,6 +3,7 @@ import 'package:flutter_idop/application.dart';
 import 'package:flutter_idop/chanting.dart';
 import 'package:flutter_idop/procedure.dart';
 import 'package:flutter_idop/program.dart';
+import 'package:flutter_idop/schedule.dart';
 import 'package:flutter_idop/eligibility.dart';
 import 'package:flutter_idop/aboutUs.dart';
 import 'package:flutter_idop/contactUs.dart';
@@ -49,9 +50,10 @@ class _NavigationState extends State<Navigation> {
           ListTile(
             title: Text('Training'),
           ),
-          buildMenu('Program & schedules', 'program'),
+          buildMenu('Program Details', 'program'),
+          buildMenu('Schedules', 'schedule'),
           buildMenu('Procedure', 'procedure'),
-          buildMenu('Chanting script & audio', 'chanting'),
+          buildMenu('Chanting Script & Audio', 'chanting'),
           buildMenu('Eligibility', 'eligibility'),
 //          new Divider(),
 //          ListTile(
@@ -84,6 +86,9 @@ class _NavigationState extends State<Navigation> {
         switch (title) {
           case 'program':
             return Program();
+            break;
+          case 'schedule':
+            return Schedule();
             break;
           case 'procedure':
             return Procedure();
