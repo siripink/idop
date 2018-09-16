@@ -34,10 +34,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Tagging tagging = new Tagging();
 
-  Widget _buildProgram(DocumentSnapshot document) {
-    return Container(
-      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-      child: ListTile(
+  Widget buildProgram(List<DocumentSnapshot> document) {
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: buildScheduleDetail(document)
+    );
+  }
+
+  List<Widget> buildScheduleDetail(List<DocumentSnapshot> documents) {
+    List<Widget> list = new List();
+    for (var document in documents) {
+      list.add(ListTile(
+        dense: false,
         title: Text(document['name'],
             style: TextStyle(fontWeight: FontWeight.w500,
               fontSize: 15.0,)),
@@ -46,8 +54,11 @@ class _HomePageState extends State<HomePage> {
           Icons.calendar_today,
           color: Colors.deepOrangeAccent,
         ),
-      ),
-    );
+      ));
+      list.add(new Divider());
+    }
+
+    return list;
   }
 
   void _showExplanatoryText() {
@@ -201,26 +212,18 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
       ]),
     );
 
-    Widget currentProgram = new Container(
-      height: 200.0,
-      child: new StreamBuilder(
-          stream: Firestore.instance
-              .collection('Programs')
-              .where('active', isEqualTo: true)
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData)
-              return const Text('Coming soon...');
-            return new ListView.builder(
-              physics: ClampingScrollPhysics(),
-              //Hide Overscoll Effect on the nested listview
-              itemCount: snapshot.data.documents.length,
-              padding: const EdgeInsets.only(top: 10.0),
-              itemExtent: 55.0,
-              itemBuilder: (context, index) =>
-                  _buildProgram(snapshot.data.documents[index]),
+    Widget buildCurrentProgram = new StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance.collection('Programs').where('active', isEqualTo: true).snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData)
+            return new Text('Coming Soon...');
+          else {
+            return new Container(
+                padding: const EdgeInsets.only(top: 12.0, left: 16.0, right: 16.0),
+                child: buildProgram(snapshot.data.documents)
             );
-          }),
+          }
+        }
     );
 
     return new Scaffold(
@@ -246,7 +249,7 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
                     ),
                     Divider(),
                     titleProgram,
-                    currentProgram,
+                    buildCurrentProgram,
 
                   ],
                 ),
