@@ -43,6 +43,20 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> buildScheduleDetail(List<DocumentSnapshot> documents) {
     List<Widget> list = new List();
+    if (documents.length > 0) {
+      list.add(new Container(
+          padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
+          child: Text(
+              'Current Programs',
+              style: TextStyle(
+                fontSize: 15.0,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.start
+          )
+      )
+      );
+    }
     for (var document in documents) {
       list.add(ListTile(
         dense: false,
@@ -183,25 +197,6 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
       ),
     );
 
-    Widget titleProgram = Container(
-      padding: const EdgeInsets.only( top: 8.0, left: 32.0, right: 32.0),
-      child: Row(
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Current Programs',
-                style: TextStyle(
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
     Widget bannerImages = new SizedBox(
       width: 600.0,
       height: 220.0,
@@ -248,7 +243,6 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
                         'LDs2wmaVcO8'
                     ),
                     Divider(),
-                    titleProgram,
                     buildCurrentProgram,
 
                   ],
