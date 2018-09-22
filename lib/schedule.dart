@@ -12,23 +12,36 @@ class _ScheduleState extends State<Schedule> {
   List<Widget> buildScheduleDetail(List<DocumentSnapshot> documents) {
       List<Widget> list = new List();
       for (var document in documents) {
-        list.add(Utils.buildTitle(document['title']));
-        list.add(Utils.buildDescription(context,'${document['period']}\n${document['language']}'));
-
+        list.add(Utils.buildTitle('${document['title']}\nLanguage: ${document['language']}'));
+        list.add(new Container(
+            padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+            child: new Text(document['period']))
+          );
         var eventSize = document.data.length;
         for (var idx = 1; idx < eventSize; idx++) {
           if (!document.data.containsKey('schedule${idx}'))
             break;
-
-          list.add(new ListTile(
-            dense: true,
-            leading: new Container(
-                width: 100.0,
-                child: Text(document['schedule${idx}']['time'])
-            ),
-            title: Text(document['schedule${idx}']['event'],
-                style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54)),
-          ));
+            list.add(
+                Container(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+              child: new Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Container(
+                      width: 115.0,
+                    padding: const EdgeInsets.only(right: 12.0),
+                      child: Text(document['schedule${idx}']['time'],
+                          style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54)),
+                  ),
+                  Expanded(
+                    child: Text(document['schedule${idx}']['event'],
+                    style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54)
+                    ),
+                  )
+                  ],
+              )
+            )
+            );
         }
         list.add(new Divider());
       }
