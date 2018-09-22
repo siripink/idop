@@ -80,7 +80,7 @@ class _ScheduleState extends State<Schedule> {
               '''
 04.30             Wake Up
 
-05.00             Morning Chanting, Meditation Session, 
+05.00             Morning Chanting, Meditation, 
                       and Spreading Loving Kindness
 
 06.30             Community Services
