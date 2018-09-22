@@ -42,7 +42,6 @@ class _MediaState extends State<Media> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
 
     return Scaffold(
       appBar: AppBar(

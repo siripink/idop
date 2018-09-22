@@ -96,8 +96,6 @@ class _ChantingState extends State<Chanting> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
-    final TextStyle descriptionStyle = theme.textTheme.subhead;
 
     return Scaffold(
       appBar: AppBar(

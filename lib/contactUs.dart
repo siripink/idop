@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:validate/validate.dart';
 import 'package:flutter_idop/utils.dart';
 import 'package:http/http.dart' as http;
-import 'dart:async';
 import 'dart:convert';
 
 class ContactUs extends StatefulWidget {
