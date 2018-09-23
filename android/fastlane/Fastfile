@@ -31,11 +31,48 @@ platform :android do
   end
 
   desc "Deploy a new version to the Google Play"
-  lane :deploy_alpha do
-    #gradle(task: "clean assembleRelease")
+  lane :deploy_alpha do  
+    
     upload_to_play_store(
         track: 'alpha',
         apk: '../build/app/outputs/apk/release/app-release.apk'
     )
   end
+
+#############################################
+  ##
+  ##  Increase APK Version Code (e.g. 760) and Version Name (e.g. 7.6.0)
+  ##  Commit and Push Changes
+  ##  Usage: fastlane bump_version version:770
+  #############################################
+  lane :bump_version do |options|
+    versionCodeString = options[:version]
+    path = '../app/build.gradle'
+    re = /versionCode\s+(\d+)/ 
+
+    s = File.read(path)
+    if versionCodeString.nil? or versionCodeString == ""
+      versionCode = s[re, 1].to_i
+      versionCodeString = (versionCode + 1).to_s
+    end 
+    
+    s[re, 1] = versionCodeString
+    
+    # transform 760 to 7.6.0
+    versionName = versionCodeString.gsub(/(.{1})(?=.)/, '\1.\2')
+    
+    regexVersionName = /versionName\s+\"\d\.\d\.\d\"/ 
+    s[regexVersionName, 0] = "versionName \"#{versionName}\""
+
+    f = File.new(path, 'w')
+    f.write(s)
+    f.close
+    
+    puts "New version: #{versionCodeString}"
+
+    #commit_and_push
+    sh "git commit -m \"Version Bump\" app/build.gradle;git push"
+  end
+
+
 end
