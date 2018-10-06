@@ -1,0 +1,119 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new release build to the App Store"
+
+  lane :release do
+    # increment_build_number(xcodeproj: "Runner.xcodeproj")
+    build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
+    upload_to_app_store
+  end
+
+
+lane :gen_all_profile do
+	match(git_url: "https://github.com/siripink/idop_cert.git",
+          type: "appstore",
+          app_identifier: "org.ordinationthai.idop",
+          readonly: false)
+
+    match(
+        git_url: "https://github.com/siripink/idop_cert.git",
+        type: "adhoc",
+        readonly: false,
+        app_identifier: "org.ordinationthai.idop"
+      )
+
+      get_push_certificate(
+        app_identifier: "org.ordinationthai.idop",
+        output_path: "./Certificates/PushNotificationCertificates",
+        pem_name: "idop-push",
+        active_days_limit: 365,
+        new_profile: proc do |profile_path| # this block gets called when a new profile was generated
+          puts "created push_certificate: #{profile_path}" # the absolute path to the new PEM file
+          # insert the code to upload the PEM file to the server
+        end
+      )
+  end
+
+lane :new_device do
+    register_devices(devices_file: "../devices.txt")
+    match(
+        git_url: "https://github.com/siripink/idop_cert.git",
+        type: "adhoc",
+        readonly: false,
+        app_identifier: "org.ordinationthai.idop",
+        force_for_new_devices: true
+      )
+end
+
+lane :idop_release do |options|
+    is_bump_version = options[:is_bump_version]
+    # ensure_git_status_clean # Make sure we don't have any unchecked in files hanging out
+    if is_bump_version.nil? or is_bump_version == true
+      bump_version
+    end
+
+    match(
+      git_url: "https://github.com/siripink/idop_cert.git",
+      type: "appstore",
+      app_identifier: "org.ordinationthai.idop",
+      readonly: true)
+    
+    gym(
+      scheme: "mudah PRODUCTION AppStore Distribution",
+      export_method: "app-store",
+      export_options: {
+        method: "app-store",
+        provisioningProfiles: {
+          "org.ordinationthai.idop" => "match AppStore com.mudah.my"
+        },
+      },
+      output_directory: "./compiledResource/production",
+      output_name: "idop.ipa"
+    )
+    
+    deliver(
+      submit_for_review: false,
+      app_identifier: "com.mudah.my",
+      ipa: "./compiledResource/production/idop.ipa",
+      force: true,
+      metadata_path: "./fastlane/metadata"
+    )
+
+    save_app_version
+        
+  end
+
+  lane :bump_version do
+    version = get_version_number
+    newVersion = sprintf("%.2f", version.to_f + 0.01)
+    increment_version_number(
+      version_number: newVersion.to_s 
+    )
+    puts get_version_number
+    
+    # Forces the commit, even if other files than the ones containing the version number have been modified
+    # This will commit mudah/Info.plist and mudah.xcodeproj/project.pbxproj
+    commit_version_bump(
+      message: "Version bump",
+      force: true 
+    )
+    push_to_git_remote
+  end
+
+  end
