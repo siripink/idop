@@ -75,13 +75,9 @@ lane :idop_release do |options|
       readonly: true)
     
     gym(
-      scheme: "mudah PRODUCTION AppStore Distribution",
       export_method: "app-store",
       export_options: {
-        method: "app-store",
-        provisioningProfiles: {
-          "org.ordinationthai.idop" => "match AppStore com.mudah.my"
-        },
+        method: "app-store"
       },
       output_directory: "./compiledResource/production",
       output_name: "idop.ipa"
@@ -89,14 +85,12 @@ lane :idop_release do |options|
     
     deliver(
       submit_for_review: false,
-      app_identifier: "com.mudah.my",
+      app_identifier: "org.ordinationthai.idop",
       ipa: "./compiledResource/production/idop.ipa",
       force: true,
       metadata_path: "./fastlane/metadata"
     )
-
-    save_app_version
-        
+  
   end
 
   lane :bump_version do

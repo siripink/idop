@@ -18,6 +18,7 @@ dependencies:
   firebase_analytics: ^1.0.3
   flutter_youtube: "^1.1.1"
   flutter_launcher_icons: "^0.6.1"
+  cached_network_image: "^0.4.1"
 
 dev_dependencies:
   flutter_test:
@@ -44,7 +45,6 @@ flutter:
   assets:
     - images/
     - images/banners/
-    - images/media/
     - assets/
 
   #  - images/a_dot_ham.jpeg

@@ -138,6 +138,8 @@ PODS:
   - path_provider (0.0.1):
     - Flutter
   - Protobuf (3.6.1)
+  - shared_preferences (0.0.1):
+    - Flutter
   - url_launcher (0.0.1):
     - Flutter
   - XCDYouTubeKit (2.5.6)
@@ -150,6 +152,7 @@ DEPENDENCIES:
   - Flutter (from `.symlinks/flutter/ios`)
   - flutter_youtube (from `.symlinks/plugins/flutter_youtube/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
 
 SPEC REPOS:
@@ -191,6 +194,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_youtube/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  shared_preferences:
+    :path: ".symlinks/plugins/shared_preferences/ios"
   url_launcher:
     :path: ".symlinks/plugins/url_launcher/ios"
 
@@ -222,6 +227,7 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
   url_launcher: 92b89c1029a0373879933c21642958c874539095
   XCDYouTubeKit: dccfe0c17dd5c5187969ec27e93069573badb08f
 
