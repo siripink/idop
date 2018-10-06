@@ -3,6 +3,7 @@ import 'package:flutter_idop/utils.dart';
 import 'package:flutter_idop/config/keys.dart';
 import 'package:flutter_idop/tagging.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Media extends StatefulWidget {
   @override
@@ -30,7 +31,7 @@ class _MediaState extends State<Media> {
       child: ListTile(
         title: Text(title,
             style: TextStyle(fontSize: 15.0)),
-        leading: new Image.asset(
+        leading: new Image.network(
           asset,
           fit: BoxFit.cover,
           width: 100.0,
@@ -40,8 +41,35 @@ class _MediaState extends State<Media> {
     );
   }
 
+  List<Widget> buildMediaDetail(List<DocumentSnapshot> documents) {
+    List<Widget> list = new List();
+    for (var document in documents) {
+      list.add(
+          buildPlayList(document['title'],
+              document['image'],
+              document['videoId']
+          )
+      );
+    }
+
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
+    Widget buildCurrentMedia = new StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance.collection('Medias').orderBy('createdTs', descending: false).snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData)
+            return new Text('Coming Soon...');
+          else {
+            return new Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: buildMediaDetail(snapshot.data.documents)
+            );
+          }
+        }
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -49,48 +77,9 @@ class _MediaState extends State<Media> {
       ),
       body: new ListView(
         // Important: Remove any padding from the ListView.
-        padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(16.0, 32.0, 16.0, 0.0),
         children: <Widget>[
-          Utils.buildTitle('Introduction To Ordination'),
-          new Padding(
-            padding: const EdgeInsets.only(top: 4.0),
-            child: new Text(''),
-          ),
-          //https://img.youtube.com/vi/aHX6wyDcZ3Y/default.jpg
-          buildPlayList('Introduction to ordination',
-              'images/media/introduction.jpg',
-              'LDs2wmaVcO8'
-          ),
-          buildPlayList('Ordain ritual in IDOP',
-              'images/media/ritual.jpg',
-              'kjmQYAddUos'
-          ),
-          buildPlayList('Once in a life time, Howard McCrary',
-              'images/media/howard.jpg',
-              'Ig5e6qc0owg'
-          ),
-          new Divider(),
-          Utils.buildTitle('Past Event'),
-          new Padding(
-            padding: const EdgeInsets.only(top: 12.0),
-            child: new Text(''),
-          ),
-          buildPlayList('IDOP is the solution',
-              'images/media/past1.jpg',
-              'BLzPvoTKmlc'
-          ),
-          buildPlayList('IDOP #11',
-              'images/media/idop11.jpg',
-              'p4SKxMfOuFg'
-          ),
-          buildPlayList('IDOP #15 (Ep.1)',
-              'images/media/idop15.jpg',
-              'hm6l9WJLJbY'
-          ),
-          buildPlayList('IDOP #16 Asking for forgiveness, robe offering ceremony',
-              'images/media/idop16.jpg',
-              'aHX6wyDcZ3Y'
-          ),
+          buildCurrentMedia,
           new Divider(),
         ],
       ),
