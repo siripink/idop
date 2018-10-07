@@ -29,7 +29,7 @@ class _MediaState extends State<Media> {
     return Container(
       padding: const EdgeInsets.only(bottom: 30.0),
       child: ListTile(
-        title: Text(title,
+          title: Text(title,
             style: TextStyle(fontSize: 15.0)),
           leading: CachedNetworkImage(
             placeholder: CircularProgressIndicator(),

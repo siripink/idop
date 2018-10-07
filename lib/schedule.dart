@@ -25,11 +25,12 @@ class _ScheduleState extends State<Schedule> {
                 Container(
                     padding: const EdgeInsets.only(bottom: 16.0),
               child: new Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   new Container(
                       width: 115.0,
-                    padding: const EdgeInsets.only(right: 12.0),
+                    padding: const EdgeInsets.only(left: 5.0, right: 12.0),
                       child: Text(document['schedule${idx}']['time'],
                           style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54)),
                   ),
@@ -47,6 +48,28 @@ class _ScheduleState extends State<Schedule> {
       }
 
       return list;
+  }
+
+  Widget buildDescription(String time, String description) {
+    return Container(
+      padding: const EdgeInsets.only(top: 16.0, left: 8.0),
+      child:  Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            width: 80.0,
+            child: Text(time,
+                style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54)),
+          ),
+          Expanded(
+            child: Text(description,
+              style:  Theme.of(context).textTheme.body1.copyWith(color: Colors.black54),
+              textAlign: TextAlign.start,),
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -76,37 +99,20 @@ class _ScheduleState extends State<Schedule> {
         padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 0.0),
         children: <Widget>[
           Utils.buildTitle('Daily Schedule'),
-          Utils.buildDescription(context,
-              '''
-04.30             Wake Up
-
-05.00             Morning Chanting, Meditation, 
-                      and Spreading Loving Kindness
-
-06.30             Community Services
-
-07.10             Breakfast
-
-09.15             Meditation Session and Dhamma Talk
-
-11.00             Lunch
-
-12.30             Personal Time
-
-14.00             Meditation Session and Dhamma Talk
-
-16.15             Exercise
-
-17.00             Refreshments
-
-18.30             Evening Chanting
-
-19.00             Meditation Session and Dhamma Talk
-
-21.00             Personal Time
-
-21.30             Sleep in Peace
-'''),
+          buildDescription('04:30', 'Wake Up'),
+          buildDescription('05:00', 'Morning Chanting, Meditation, and Spreading Loving Kindness'),
+          buildDescription('06:30', 'Community Services'),
+          buildDescription('07:10', 'Breakfast'),
+          buildDescription('09:15', 'Meditation Session and Dhamma Talk'),
+          buildDescription('11:00', 'Lunch'),
+          buildDescription('12:30', 'Personal Time'),
+          buildDescription('14:00', 'Meditation Session and Dhamma Talk'),
+          buildDescription('16:15', 'Exercise'),
+          buildDescription('17:00', 'Refreshments'),
+          buildDescription('18:30', 'Evening Chanting'),
+          buildDescription('19:00', 'Meditation Session and Dhamma Talk'),
+          buildDescription('21:00', 'Personal Time'),
+          buildDescription('21:30', 'Sleep in Peace'),
           new Divider(),
           buildCurrentSchedule,
 
