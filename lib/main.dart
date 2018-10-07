@@ -239,7 +239,7 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
                       child: new Text(''),
                     ),
                     buildPlayList('Introduction to ordination',
-                        'images/media/introduction.jpg',
+                        'images/media.jpg',
                         'LDs2wmaVcO8'
                     ),
                     Divider(),
