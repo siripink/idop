@@ -46,32 +46,32 @@ platform :android do
   ##  Usage: fastlane bump_version version:770
   #############################################
   lane :bump_version do |options|
-    versionCodeString = options[:version]
-    path = '../app/build.gradle'
-    re = /versionCode\s+(\d+)/ 
+    # versionCodeString = options[:version]
+    # path = '../app/build.gradle'
+    # re = /versionCode\s+(\d+)/ 
 
-    s = File.read(path)
-    if versionCodeString.nil? or versionCodeString == ""
-      versionCode = s[re, 1].to_i
-      versionCodeString = (versionCode + 1).to_s
-    end 
+    # s = File.read(path)
+    # if versionCodeString.nil? or versionCodeString == ""
+    #   versionCode = s[re, 1].to_i
+    #   versionCodeString = (versionCode + 1).to_s
+    # end 
     
-    s[re, 1] = versionCodeString
+    # s[re, 1] = versionCodeString
     
-    # transform 760 to 7.6.0
-    versionName = versionCodeString.gsub(/(.{1})(?=.)/, '\1.\2')
+    # # transform 760 to 7.6.0
+    # versionName = versionCodeString.gsub(/(.{1})(?=.)/, '\1.\2')
     
-    regexVersionName = /versionName\s+\"\d\.\d\.\d\"/ 
-    s[regexVersionName, 0] = "versionName \"#{versionName}\""
+    # regexVersionName = /versionName\s+\"\d\.\d\.\d\"/ 
+    # s[regexVersionName, 0] = "versionName \"#{versionName}\""
 
-    f = File.new(path, 'w')
-    f.write(s)
-    f.close
+    # f = File.new(path, 'w')
+    # f.write(s)
+    # f.close
     
-    puts "New version: #{versionCodeString}"
+    # puts "New version: #{versionCodeString}"
 
     #commit_and_push
-    sh "git commit -m \"Version Bump\" app/build.gradle;git push"
+    sh "git commit -m \"Version Bump\" android/app/build.gradle;git push"
   end
 
 
