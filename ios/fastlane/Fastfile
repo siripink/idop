@@ -63,9 +63,10 @@ end
 
 lane :idop_release do |options|
     is_bump_version = options[:is_bump_version]
+    build_number = options[:build_number]
     # ensure_git_status_clean # Make sure we don't have any unchecked in files hanging out
     if is_bump_version.nil? or is_bump_version == true
-      bump_version
+      bump_version(build_number: build_number)
     end
 
     match(
@@ -93,13 +94,21 @@ lane :idop_release do |options|
   
   end
 
-  lane :bump_version do
+  lane :bump_version do |options|
+    build_number = options[:build_number]
+    if build_number.nil?
+      build_number = 1
+    end
     version = get_version_number
     newVersion = sprintf("%.2f", version.to_f + 0.01)
     increment_version_number(
       version_number: newVersion.to_s 
     )
+    increment_build_number(
+      build_number: build_number.to_s # set a specific number
+    )
     puts get_version_number
+    puts build_number
     
     # Forces the commit, even if other files than the ones containing the version number have been modified
     # This will commit mudah/Info.plist and mudah.xcodeproj/project.pbxproj
