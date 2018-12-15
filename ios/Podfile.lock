@@ -200,12 +200,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher/ios"
 
 SPEC CHECKSUMS:
-  audioplayers: def111f6a23e00d9d103563b07de5e44a727bd3c
+  audioplayers: 84f968cea3f2deab00ec4f8ff53358b3c0b3992c
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
-  cloud_firestore: a2d49d9c7219fce31033eb1a2ee953d7733c91d6
+  cloud_firestore: c575f263eb7033afb7d407e6264b21d6e622a061
   Firebase: a870ed114d769b424021a0c8ddb0c86c3250a0c5
-  firebase_analytics: fcc60a9de4b8e07aa5af8941303a7f5fe6e0383f
-  firebase_core: c96aa8b2fcf7f5167d32f22034f502f9304952b8
+  firebase_analytics: 7fa219488f2a781ca776bf72ecc66b6ac4511272
+  firebase_core: ce5006bb48508ee4e71e0f429a3f519bb8ee2961
   FirebaseAnalytics: 361594968a84a04d9598ef0f2e769d3735cd03de
   FirebaseAuth: 504b198ceb3472dca5c65bb95544ea44cfc9439e
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
@@ -213,8 +213,8 @@ SPEC CHECKSUMS:
   FirebaseDatabase: e2bcbc106adc4b11a2da3ec2eb63c0c4a44f2f54
   FirebaseFirestore: c9ec5660228f97ed10782d72b0498449af07256d
   FirebaseInstanceID: ea5af6920d0a4a29b40459d055bebe4a6c1333c4
-  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
-  flutter_youtube: e237870de392a5ee800e9c36a13796ed887718b2
+  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  flutter_youtube: 142f8d5af0a11963bdc73e13bcae6eb78db746c2
   GoogleAppMeasurement: 7d2552cea4e12d09ce737ef0441887a746585ff3
   GoogleUtilities: 760ccb53b7c7f40f9c02d8c241f76f841a7a6162
   gRPC: 9d4c549f37c7cef22478634bac7a0405b6e3dbfb
@@ -225,12 +225,12 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  path_provider: 09407919825bfe3c2deae39453b7a5b44f467873
+  path_provider: f96fff6166a8867510d2c25fdcc346327cc4b259
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-  shared_preferences: 5a1d487c427ee18fcd3ea1f2a131569481834b53
-  url_launcher: 92b89c1029a0373879933c21642958c874539095
+  shared_preferences: 1feebfa37bb57264736e16865e7ffae7fc99b523
+  url_launcher: 0067ddb8f10d36786672aa0722a21717dba3a298
   XCDYouTubeKit: dccfe0c17dd5c5187969ec27e93069573badb08f
 
 PODFILE CHECKSUM: 1e5af4103afd21ca5ead147d7b81d06f494f51a2
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.2

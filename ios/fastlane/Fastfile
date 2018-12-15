@@ -89,7 +89,8 @@ lane :idop_release do |options|
       app_identifier: "org.ordinationthai.idop",
       ipa: "./compiledResource/production/idop.ipa",
       force: true,
-      metadata_path: "./fastlane/metadata"
+      metadata_path: "./fastlane/metadata",
+      skip_screenshots: true
     )
   
   end
