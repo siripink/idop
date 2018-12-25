@@ -55,11 +55,11 @@ class _NavigationState extends State<Navigation> {
           buildMenu('Procedure', 'procedure'),
           buildMenu('Chanting Script & Audio', 'chanting'),
           buildMenu('Eligibility', 'eligibility'),
-//          new Divider(),
-//          ListTile(
-//            title: Text('Online Application'),
-//            onTap: () => _navigateTo('application'),
-//          ),
+          new Divider(),
+          ListTile(
+            title: Text('Online Application'),
+            onTap: () => _navigateTo('application'),
+          ),
           new Divider(),
           ListTile(
             title: Text('About Us'),
