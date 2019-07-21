@@ -15,12 +15,13 @@ class Utils {
   }
 
   static Widget buildDescription(BuildContext context, String description) {
+    TextStyle textStyle = Theme.of(context).textTheme.body1.copyWith(color: Colors.black54, height: 1.2);
     return Container(
       padding: const EdgeInsets.only(top: 18.0),
       child: Text(
         description,
         textAlign: TextAlign.justify,
-        style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54),
+        style: textStyle,
         softWrap: true,
       ),
     );

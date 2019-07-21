@@ -112,29 +112,28 @@ class _PlayerWidgetState extends State<PlayerWidget> {
     if (isLocal) {
       audioCache = new AudioCache(fixedPlayer: _audioPlayer);
     }
-    _audioPlayer.durationHandler = (d) => setState(() {
-          _duration = d;
-        });
+    _audioPlayer.onDurationChanged.listen((Duration d) {
+      setState(() => _duration = d);
+    });
 
-    _audioPlayer.positionHandler = (p) => setState(() {
-          _position = p;
-        });
+    _audioPlayer.onAudioPositionChanged.listen((Duration p) {
+      setState(() => _position = p);
+    });
 
-    _audioPlayer.completionHandler = () {
+    _audioPlayer.onPlayerCompletion.listen((event) {
       _onComplete();
       setState(() {
         _position = _duration;
       });
-    };
+    });
 
-    _audioPlayer.errorHandler = (msg) {
-      print('audioPlayer error : $msg');
+    _audioPlayer.onPlayerError.listen((msg) {
       setState(() {
         _playerState = PlayerState.stopped;
-        _duration = new Duration(seconds: 0);
-        _position = new Duration(seconds: 0);
+        _duration = Duration(seconds: 0);
+        _position = Duration(seconds: 0);
       });
-    };
+    });
   }
 
   Future<int> _play() async {

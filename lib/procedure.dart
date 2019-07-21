@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_idop/utils.dart';
+import 'utils.dart';
+import 'navigation.dart';
 
 class Procedure extends StatefulWidget {
   @override
@@ -61,6 +62,7 @@ They will form a line following the instruction to walk to the north side of the
           new Divider(),
         ],
       ),
+        drawer: Navigation()
     );
   }
 }

@@ -1,10 +1,12 @@
-import 'package:flutter_idop/carousel.dart';
+import 'carousel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_idop/navigation.dart';
-import 'package:flutter_idop/config/keys.dart';
-import 'package:flutter_idop/tagging.dart';
+import 'navigation.dart';
+import 'config/keys.dart';
+import 'tagging.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
+import 'helper/linkText.dart';
+
 
 void main() => runApp(new MyApp());
 
@@ -46,14 +48,23 @@ class _HomePageState extends State<HomePage> {
     if (documents.length > 0) {
       list.add(new Container(
           padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
-          child: Text(
-              'Current Programs',
-              style: TextStyle(
-                fontSize: 15.0,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.start
-          )
+          child: new RichText(
+              textAlign: TextAlign.justify,
+              text: new TextSpan(
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: <TextSpan>[
+                    new TextSpan(text: 'Current Programs',
+                        style: TextStyle(
+                        color: Colors.black
+                    )),
+                    new LinkText(text: ' - (Online Application)',
+                        url: 'https://ordinationthai.org/online-application/',
+                        tag: 'online_application'),
+                  ]
+              ))
       )
       );
     }
@@ -95,10 +106,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void playYoutubeVideoId(String videoId) {
-    var youtube = new FlutterYoutube();
     tagging.sendEvent('home_youtube_' + videoId);
 
-    youtube.playYoutubeVideoById(
+    FlutterYoutube.playYoutubeVideoById(
       apiKey: youTubeKey,
       videoId: videoId,
       autoPlay: true,

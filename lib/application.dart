@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_idop/dropdown_formfield.dart';
+import 'dropdown_formfield.dart';
+import 'navigation.dart';
 
 class Application extends StatefulWidget {
   @override
@@ -54,7 +55,8 @@ class _ApplicationState extends State<Application> {
           validator: (value) {
             if (value.isEmpty || value.length < 10) {
               return 'Please enter valid number';
-            }
+            } else
+              return null;
           },
           onSaved: (String value) {
             data.phone = value;
@@ -79,7 +81,8 @@ class _ApplicationState extends State<Application> {
           validator: (value) {
             if (value.isEmpty || !value.contains('@')) {
               return 'Please enter valid email';
-            }
+            } else
+              return null;
           },
           onSaved: (String value) {
             data.email = value;
@@ -103,7 +106,8 @@ class _ApplicationState extends State<Application> {
           validator: (value) {
             if (value.isEmpty || value.length > 2) {
               return 'Please enter valid age';
-            }
+            } else
+              return null;
           },
           maxLines: 1,
           onSaved: (String value) {
@@ -149,7 +153,7 @@ class _ApplicationState extends State<Application> {
 
         showDialog(
             context: context,
-            child: new AlertDialog(
+            builder: (_) => new AlertDialog(
               title: new Text("Details"),
               //content: new Text("Hello World"),
               content: new SingleChildScrollView(
@@ -244,7 +248,9 @@ class _ApplicationState extends State<Application> {
                       });
                     },
                   ),
-                ))));
+                ))),
+        drawer: Navigation()
+    );
   }
 
   static Widget personalInfo = new Column(
@@ -275,7 +281,8 @@ class _ApplicationState extends State<Application> {
       validator: (value) {
         if (value.isEmpty || value.length < 1) {
           return 'Please enter your ${textLabel.toLowerCase()}';
-        }
+        } else
+          return null;
       },
       decoration: new InputDecoration(
           labelText: '${textLabel}',

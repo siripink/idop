@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_idop/audio.dart';
-import 'package:flutter_idop/utils.dart';
-import 'package:flutter_idop/tagging.dart';
+import 'audio.dart';
+import 'utils.dart';
+import 'tagging.dart';
+import 'navigation.dart';
 
 class Chanting extends StatefulWidget {
   @override
@@ -168,6 +169,7 @@ class _ChantingState extends State<Chanting> {
           new Divider(),
         ],
       ),
+        drawer: Navigation()
     );
   }
 }

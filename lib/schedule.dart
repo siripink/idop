@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_idop/utils.dart';
+import 'utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'navigation.dart';
 
 class Schedule extends StatefulWidget {
   @override
@@ -19,7 +20,7 @@ class _ScheduleState extends State<Schedule> {
           );
         var eventSize = document.data.length;
         for (var idx = 1; idx < eventSize; idx++) {
-          if (!document.data.containsKey('schedule${idx}'))
+          if (!document.data.containsKey('schedule$idx'))
             break;
             list.add(
                 Container(
@@ -31,11 +32,11 @@ class _ScheduleState extends State<Schedule> {
                   new Container(
                       width: 115.0,
                     padding: const EdgeInsets.only(left: 5.0, right: 12.0),
-                      child: Text(document['schedule${idx}']['time'],
+                      child: Text(document['schedule$idx']['time'],
                           style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54)),
                   ),
                   Expanded(
-                    child: Text(document['schedule${idx}']['event'],
+                    child: Text(document['schedule$idx']['event'],
                     style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54)
                     ),
                   )
@@ -118,6 +119,7 @@ class _ScheduleState extends State<Schedule> {
 
         ],
       ),
+        drawer: Navigation()
     );
   }
 }
