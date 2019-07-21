@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_idop/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'utils.dart';
+import 'navigation.dart';
 
 class AboutUs extends StatefulWidget {
   @override
@@ -56,6 +57,7 @@ Hence the cultivation of a consciousness of goodness in students is extremely cr
            new Divider(),
         ],
       ),
+        drawer: Navigation()
     );
   }
 }

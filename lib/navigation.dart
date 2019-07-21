@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_idop/application.dart';
-import 'package:flutter_idop/chanting.dart';
-import 'package:flutter_idop/procedure.dart';
-import 'package:flutter_idop/program.dart';
-import 'package:flutter_idop/schedule.dart';
-import 'package:flutter_idop/eligibility.dart';
-import 'package:flutter_idop/aboutUs.dart';
-import 'package:flutter_idop/contactUs.dart';
-import 'package:flutter_idop/faq.dart';
-import 'package:flutter_idop/tagging.dart';
-import 'package:flutter_idop/media.dart';
+
+import 'main.dart';
+import 'aboutUs.dart';
+import 'application.dart';
+import 'chanting.dart';
+import 'contactUs.dart';
+import 'eligibility.dart';
+import 'faq.dart';
+import 'helper/linkText.dart';
+import 'media.dart';
+import 'procedure.dart';
+import 'program.dart';
+import 'schedule.dart';
+import 'tagging.dart';
 
 class DrawerItem {
   String title;
@@ -19,7 +22,6 @@ class DrawerItem {
 }
 
 class Navigation extends StatefulWidget {
-
   @override
   _NavigationState createState() => _NavigationState();
 }
@@ -27,26 +29,25 @@ class Navigation extends StatefulWidget {
 class _NavigationState extends State<Navigation> {
   Widget drawer() {
     return Drawer(
-      // Add a ListView to the drawer. This ensures the user can scroll
-      // through the options in the Drawer if there isn't enough vertical
-      // space to fit everything.
-      child:
-        new Container(
-          color: Colors.orange[100],
-          child:
-      ListView(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the Drawer if there isn't enough vertical
+        // space to fit everything.
+        child: new Container(
+      color: Colors.orange[100],
+      child: ListView(
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
-            child: Image.asset(
-              'images/logo.png',
-              fit: BoxFit.fitWidth,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-          ),
+          GestureDetector(
+              onTap: () => _navigateTo('home'),
+              child: DrawerHeader(
+                  child: Image.asset(
+                    'images/logo.png',
+                    fit: BoxFit.fitWidth,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ))),
           ListTile(
             title: Text('Training'),
           ),
@@ -57,11 +58,6 @@ class _NavigationState extends State<Navigation> {
           buildMenu('Eligibility', 'eligibility'),
           new Divider(),
           ListTile(
-            title: Text('Online Application'),
-            onTap: () => _navigateTo('application'),
-          ),
-          new Divider(),
-          ListTile(
             title: Text('About Us'),
             onTap: () => _navigateTo('about'),
           ),
@@ -69,11 +65,27 @@ class _NavigationState extends State<Navigation> {
           buildMenu('About Us', 'about'),
           buildMenu('Media', 'media'),
           buildMenu('FAQ', 'faq'),
-
+          new Divider(),
+          ListTile(
+            title: new RichText(
+                textAlign: TextAlign.justify,
+                text: new TextSpan(
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    children: <TextSpan>[
+                      new LinkText(
+                          text: 'Online Application',
+                          url: 'https://ordinationthai.org/online-application/',
+                          tag: 'online_application'),
+                    ])),
+            //onTap: () => _navigateTo('application'),
+          ),
+          new Divider(),
         ],
       ),
-        )
-    );
+    ));
   }
 
   void _navigateTo(String title) {
@@ -84,6 +96,9 @@ class _NavigationState extends State<Navigation> {
         Tagging tagging = new Tagging();
         tagging.sendEvent('view_' + title);
         switch (title) {
+          case 'home':
+            return MyApp();
+            break;
           case 'program':
             return Program();
             break;
@@ -112,6 +127,7 @@ class _NavigationState extends State<Navigation> {
             return Media();
             break;
           case 'faq':
+          default:
             return FAQ();
             break;
         }

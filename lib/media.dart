@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_idop/config/keys.dart';
-import 'package:flutter_idop/tagging.dart';
+import 'config/keys.dart';
+import 'tagging.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'navigation.dart';
 
 class Media extends StatefulWidget {
   @override
@@ -15,10 +16,9 @@ class _MediaState extends State<Media> {
   Tagging tagging = new Tagging();
 
   void playYoutubeVideoId(String videoId) {
-    var youtube = new FlutterYoutube();
     tagging.sendEvent('youtube_' + videoId);
 
-    youtube.playYoutubeVideoById(
+    FlutterYoutube.playYoutubeVideoById(
       apiKey: youTubeKey,
       videoId: videoId,
       autoPlay: true
@@ -32,7 +32,7 @@ class _MediaState extends State<Media> {
           title: Text(title,
             style: TextStyle(fontSize: 15.0)),
           leading: CachedNetworkImage(
-            placeholder: CircularProgressIndicator(),
+            placeholder: (context, url) => new CircularProgressIndicator(),
             width: 100.0,
             imageUrl: imageUrl,
           ),
@@ -83,6 +83,7 @@ class _MediaState extends State<Media> {
           new Divider(),
         ],
       ),
+        drawer: Navigation()
     );
   }
 }

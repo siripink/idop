@@ -1,26 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter_idop/utils.dart';
-import 'package:flutter_idop/chanting.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_idop/tagging.dart';
+import 'utils.dart';
+import 'chanting.dart';
+import 'helper/linkText.dart';
+import 'navigation.dart';
 
 class Eligibility extends StatefulWidget {
   @override
   _EligibilityState createState() => _EligibilityState();
 }
 
-class _LinkTextSpan extends TextSpan {
-  _LinkTextSpan({String url, String text, String tag}) : super(
-    style: new TextStyle(color: Colors.deepOrange),
-    text: text ?? url,
-    recognizer: new TapGestureRecognizer()..onTap = () {
-      launch(url, forceSafariVC: false);
-      Tagging tagging = new Tagging();
-      tagging.sendEvent('download_' + tag);
-    }
-  );
-}
 
 class _LinkInAppTextSpan extends TextSpan {
   _LinkInAppTextSpan({BuildContext context, String url, String text}) : super(
@@ -43,13 +32,13 @@ class _LinkInAppTextSpan extends TextSpan {
 }
 
 class _EligibilityState extends State<Eligibility> {
-  
-  Widget buildBullet(String text) {
+
+  Widget buildBullet(TextStyle textStyle, String text) {
   return new ListTile(
     title: Text(
       text,
       textAlign: TextAlign.justify,
-      style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54),
+      style: textStyle,
       softWrap: true,
     ),
     leading: new Icon(
@@ -60,12 +49,12 @@ class _EligibilityState extends State<Eligibility> {
   );
   }
 
-  Widget buildBulletMixBold() {
+  Widget buildBulletMixBold(TextStyle textStyle) {
     return new ListTile(
       title: new RichText(
         textAlign: TextAlign.justify,
           text: new TextSpan(
-              style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54),
+              style: textStyle,
               children: <TextSpan>[
                 new TextSpan(text: 'Willing to strictly follow IDOP instructions and observe the Buddhist Eight Precepts as part of the training experience.',
                 ),
@@ -85,7 +74,7 @@ class _EligibilityState extends State<Eligibility> {
 
   @override
   Widget build(BuildContext context) {
-
+    TextStyle textStyle = Theme.of(context).textTheme.body1.copyWith(color: Colors.black54, height: 1.2);
     return Scaffold(
       appBar: AppBar(
         title: Text('Eligibility'),
@@ -97,24 +86,24 @@ class _EligibilityState extends State<Eligibility> {
           new RichText(
               textAlign: TextAlign.justify,
               text: new TextSpan(
-                  style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54),
+                  style: textStyle,
                   children: <TextSpan>[
                     new TextSpan(text: '''
 
 The International Dhammadayada Training & Ordination Program is designed to help participants achieve personal success during four weeks of training. Please see our web page called ''',
                      ),
-                    new _LinkTextSpan(text: '"Monastic Code for Ordination" (pdf)',
+                    new LinkText(text: '"Monastic Code for Ordination" (pdf)',
                         url: 'https://ordinationthai.org/wp-content/uploads/2015/05/Vinaya-for-Ordination.pdf',
                         tag: 'monastic_code_pdf'),
                     new TextSpan(text: ' regarding a complete list of restrictions for ordination. We require all applicants to be:',
                     ),
                   ]
               )),
-          buildBullet('Male, heterosexual, between the ages of 18 and 60'),
-          buildBullet('Of good mental and physical health, free from infectious diseases, drug or alcohol dependence, facial piercings, inappropriate tattoos, and severe physical handicaps.'),
-          buildBullet('Content with non-vegetarian diet and simple accommodation provided by the temple'),
-          buildBullet('Free from commitments that might cause interruptions during the program such as examinations and vocational placements'),
-          buildBulletMixBold(),
+          buildBullet( textStyle, 'Male, heterosexual, between the ages of 18 and 60'),
+          buildBullet( textStyle, 'Of good mental and physical health, free from infectious diseases, drug or alcohol dependence, facial piercings, inappropriate tattoos, and severe physical handicaps.'),
+          buildBullet( textStyle, 'Content with non-vegetarian diet and simple accommodation provided by the temple'),
+          buildBullet( textStyle, 'Free from commitments that might cause interruptions during the program such as examinations and vocational placements'),
+          buildBulletMixBold(textStyle),
           Utils.buildDescription(context,
               '''
 Participants usually learn from personal experiences that observing the Eight Precepts enhances their practice of meditation while helping to create a peaceful and harmonious environment conducive to inner personal development for every participant.
@@ -145,16 +134,16 @@ In order to improve the international experience for all IDOP participants, resi
           new RichText(
               textAlign: TextAlign.justify,
               text: new TextSpan(
-                  style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54),
+                  style: textStyle,
                   children: <TextSpan>[
                     new TextSpan(text: '''
 
 You can download '''),
-                    new _LinkTextSpan(text: '"Ordination Chanting (Ukasa style)" (pdf)',
+                    new LinkText(text: '"Ordination Chanting (Ukasa style)" (pdf)',
                         url: 'https://ordinationthai.org/download/ordination-chanting-english/?wpdmdl=736',
                         tag: 'chanting_pdf'),
                     new TextSpan(text: ' to practice the ordination chanting. For practicing the chanting with audio, please visit: '),
-                      new _LinkInAppTextSpan(context: context,
+                    new _LinkInAppTextSpan(context: context,
                       text: 'the Chanting page'),
                   ]
               )),
@@ -164,16 +153,15 @@ Here are two meditation sessions by Phra Nicholas Thanissaro you can use to prac
           new RichText(
               textAlign: TextAlign.justify,
               text: new TextSpan(
-                  style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54),
+                  style: textStyle,
                   children: <TextSpan>[
-                    new _LinkTextSpan(text: '''
+                    new LinkText(text: '''
 
 -  Meditation for beginners (The seven bases of the mind) - MP3
-
 ''',
                         url: 'https://ordinationthai.org/download/meditation-for-beginners-seven-bases-of-the-mind/?wpdmdl=752',
                         tag: 'seven_bases_mp3'),
-                    new _LinkTextSpan(text: '''
+                    new LinkText(text: '''
 -  Dhammakaya meditation for beginners (The center of the body) - MP3''',
                         url: 'https://ordinationthai.org/download/meditation-for-beginners-center/?wpdmdl=750',
                         tag: 'center_mp3'),
@@ -185,6 +173,7 @@ To free yourself from worry, we recommend that you leave at home valuable items 
           new Divider(),
         ],
       ),
+        drawer: Navigation()
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_idop/utils.dart';
-
+import 'utils.dart';
 import 'player_widget.dart';
 
 class Audio extends StatefulWidget {

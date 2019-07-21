@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:validate/validate.dart';
-import 'package:flutter_idop/utils.dart';
+import 'utils.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'navigation.dart';
 
 class ContactUs extends StatefulWidget {
   @override
@@ -223,6 +224,7 @@ The simplest way to come to Dhammakaya Temple the first time is to take a metere
             ),
           )
       ),
+        drawer: Navigation()
     );
   }
 }

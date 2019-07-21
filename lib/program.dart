@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_idop/utils.dart';
+import 'utils.dart';
+import 'navigation.dart';
 
 class Program extends StatefulWidget {
   @override
@@ -83,6 +84,7 @@ Monks manage to free themselves from worldly desire by fulfilling the daily rout
           new Divider(),
         ],
       ),
+        drawer: Navigation()
     );
   }
 }

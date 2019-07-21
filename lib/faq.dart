@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'navigation.dart';
 
 class FAQ extends StatelessWidget {
   static const String routeName = '/material/two-level-list';
@@ -146,7 +147,7 @@ class FAQ extends StatelessWidget {
               new ExpansionTile(
                   title: const Text('Will I be allowed to ordain if I am not heterosexual?'),
                   children: <Widget>[
-                    buildAnswer( context, 'According to the Vinaya Rules for Ordination, men whose sexual orientation is not heterosexual are not permitted to ordain. This excludes the following people from ordaining: Transvestite; Hermaphrodite; Transsexual (Shemale); Homosexual; and Bisexual. Requirements for ordination are based on the teaching of Lord Buddha concerning eligibility for the Sangha.'),
+                    buildAnswer( context, 'According to the Vinaya Rules for Ordination, men whose sexual orientation is not heterosexual are not permitted to ordain. This excludes the following people from ordaining: Transvestite; Hermaphrodite; Transgender; Homosexual; and Bisexual. Requirements for ordination are based on the teaching of Lord Buddha concerning eligibility for the Sangha.'),
                   ]
               ),
               new ExpansionTile(
@@ -240,7 +241,8 @@ class FAQ extends StatelessWidget {
                   ]
               ),
             ]
-        )
+        ),
+        drawer: Navigation()
     );
   }
 
