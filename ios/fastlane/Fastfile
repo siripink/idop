@@ -61,12 +61,18 @@ lane :new_device do
       )
 end
 
+#############################################
+##
+##  "Build Release Production IPA and upload to AppStore"
+##  usage: bundle exec fastlane idop_release is_bump_version:false build_number:02
+##
+#############################################
 lane :idop_release do |options|
     is_bump_version = options[:is_bump_version]
     build_number = options[:build_number]
     # ensure_git_status_clean # Make sure we don't have any unchecked in files hanging out
-    if is_bump_version.nil? or is_bump_version == true
-      bump_version(build_number: build_number)
+    if is_bump_version.nil? or is_bump_version == true or not build_number.nil?
+      bump_version(is_bump_version: "#{is_bump_version}", build_number: build_number)
     end
 
     match(
@@ -96,15 +102,20 @@ lane :idop_release do |options|
   end
 
   lane :bump_version do |options|
+    is_bump_version = options[:is_bump_version]
     build_number = options[:build_number]
     if build_number.nil?
-      build_number = 1
+      build_number = "01"
     end
-    version = get_version_number
-    newVersion = sprintf("%.2f", version.to_f + 0.01)
-    increment_version_number(
-      version_number: newVersion.to_s 
-    )
+
+    if is_bump_version.nil? or is_bump_version == true
+      version = get_version_number
+      newVersion = sprintf("%.2f", version.to_f + 0.01)
+      increment_version_number(
+        version_number: newVersion.to_s 
+      )
+    end
+
     increment_build_number(
       build_number: build_number.to_s # set a specific number
     )
