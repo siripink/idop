@@ -26,7 +26,8 @@ platform :ios do
 
 
 lane :gen_all_profile do
-	match(git_url: "https://github.com/siripink/idop_cert.git",
+
+	  match(git_url: "https://github.com/siripink/idop_cert.git",
           type: "appstore",
           app_identifier: "org.ordinationthai.idop",
           readonly: false)
