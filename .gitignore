@@ -2,6 +2,7 @@ report.xml
 ios/compiledResource/
 lib/config/
 android/key.properties
+*.sh
 # Built application files
 *.apk
 *.ap_
