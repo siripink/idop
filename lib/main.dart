@@ -6,9 +6,14 @@ import 'config/keys.dart';
 import 'tagging.dart';
 import 'package:flutter_youtube/flutter_youtube.dart';
 import 'helper/linkText.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-
-void main() => runApp(new MyApp());
+//void main() => runApp(new MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -71,10 +76,10 @@ class _HomePageState extends State<HomePage> {
     for (var document in documents) {
       list.add(ListTile(
         dense: false,
-        title: Text(document['name'],
+        title: Text(document.data()['name'],
             style: TextStyle(fontWeight: FontWeight.w500,
               fontSize: 15.0,)),
-        subtitle: Text(document['period']),
+        subtitle: Text(document.data()['period']),
         leading: Icon(
           Icons.calendar_today,
           color: Colors.deepOrangeAccent,
@@ -218,14 +223,21 @@ Once in life time, having ordination to be Buddhist monk with IDOP Program. You 
     );
 
     Widget buildCurrentProgram = new StreamBuilder<QuerySnapshot>(
-        stream: Firestore.instance.collection('Programs').where('active', isEqualTo: true).snapshots(),
+        stream: FirebaseFirestore.instance.collection('Programs').where('active', isEqualTo: true).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text('Loading');
+          }
           if (!snapshot.hasData)
-            return new Text('Coming Soon...');
+            return Text('Coming Soon...');
           else {
             return new Container(
                 padding: const EdgeInsets.only(top: 12.0, left: 16.0, right: 16.0),
-                child: buildProgram(snapshot.data.documents)
+                child: buildProgram(snapshot.data.docs)
             );
           }
         }

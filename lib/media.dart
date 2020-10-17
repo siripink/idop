@@ -43,14 +43,14 @@ class _MediaState extends State<Media> {
 
   List<Widget> buildMediaDetail(List<DocumentSnapshot> documents) {
     List<Widget> list = new List();
-    for (var document in documents) {
-      list.add(
-          buildPlayList(document['title'],
-              document['image'],
-              document['videoId']
+    documents.forEach((document) {
+            list.add(
+              buildPlayList(document.data()['title'],
+              document.data()['image'],
+              document.data()['videoId']
           )
       );
-    }
+    });
 
     return list;
   }
@@ -58,14 +58,21 @@ class _MediaState extends State<Media> {
   @override
   Widget build(BuildContext context) {
     Widget buildCurrentMedia = new StreamBuilder<QuerySnapshot>(
-        stream: Firestore.instance.collection('Medias').orderBy('createdTs', descending: false).snapshots(),
+        stream: FirebaseFirestore.instance.collection('Medias').orderBy('createdTs', descending: false).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text('Loading');
+          }
           if (!snapshot.hasData)
             return new Text('Coming Soon...');
           else {
             return new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: buildMediaDetail(snapshot.data.documents)
+                children: buildMediaDetail(snapshot.data.docs)
             );
           }
         }

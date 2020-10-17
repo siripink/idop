@@ -13,14 +13,14 @@ class _ScheduleState extends State<Schedule> {
   List<Widget> buildScheduleDetail(List<DocumentSnapshot> documents) {
       List<Widget> list = new List();
       for (var document in documents) {
-        list.add(Utils.buildTitle('${document['title']}\nLanguage: ${document['language']}'));
+        list.add(Utils.buildTitle('${document.data()['title']}\nLanguage: ${document.data()['language']}'));
         list.add(new Container(
             padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
-            child: new Text(document['period']))
+            child: new Text(document.data()['period']))
           );
-        var eventSize = document.data.length;
+        var eventSize = document.data().length;
         for (var idx = 1; idx < eventSize; idx++) {
-          if (!document.data.containsKey('schedule$idx'))
+          if (!document.data().containsKey('schedule$idx'))
             break;
             list.add(
                 Container(
@@ -33,11 +33,11 @@ class _ScheduleState extends State<Schedule> {
                       width: 115.0,
                     padding: const EdgeInsets.only(left: 5.0, right: 12.0),
                       child: Text(document['schedule$idx']['time'],
-                          style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54)),
+                          style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black54)),
                   ),
                   Expanded(
                     child: Text(document['schedule$idx']['event'],
-                    style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54)
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black54)
                     ),
                   )
                   ],
@@ -61,11 +61,11 @@ class _ScheduleState extends State<Schedule> {
           Container(
             width: 80.0,
             child: Text(time,
-                style: Theme.of(context).textTheme.body1.copyWith(color: Colors.black54)),
+                style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black54)),
           ),
           Expanded(
             child: Text(description,
-              style:  Theme.of(context).textTheme.body1.copyWith(color: Colors.black54),
+              style:  Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.black54),
               textAlign: TextAlign.start,),
           )
         ],
@@ -77,14 +77,14 @@ class _ScheduleState extends State<Schedule> {
   Widget build(BuildContext context) {
 
     Widget buildCurrentSchedule = new StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('Schedules').where('active', isEqualTo: true).snapshots(),
+      stream: FirebaseFirestore.instance.collection('Schedules').where('active', isEqualTo: true).snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData)
           return new Text('Coming Soon...');
         else {
           return new Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: buildScheduleDetail(snapshot.data.documents)
+              children: buildScheduleDetail(snapshot.data.docs)
           );
         }
       }
