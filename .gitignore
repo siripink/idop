@@ -1,3 +1,4 @@
+*.pkey
 report.xml
 ios/compiledResource/
 lib/config/
