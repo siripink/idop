@@ -12,7 +12,7 @@ Install _fastlane_ using
 ```
 [sudo] gem install fastlane -NV
 ```
-or alternatively using `brew cask install fastlane`
+or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
@@ -24,6 +24,11 @@ Push a new release build to the App Store
 ### ios gen_all_profile
 ```
 fastlane ios gen_all_profile
+```
+
+### ios new_push
+```
+fastlane ios new_push
 ```
 
 ### ios new_device
